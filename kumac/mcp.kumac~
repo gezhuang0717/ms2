@@ -1,0 +1,7 @@
+book ana/mcp.ana
+*
+ana/loop ./ridf/run0123.ridf b ; mess RUN 0240 end.
+
+
+*
+hstore mcp-123.hbk

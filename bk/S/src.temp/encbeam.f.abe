@@ -1,0 +1,94 @@
+      SUBROUTINE EncBeam(val,nx,ny,naok,
+     &     rawdata,nhitdata,hitdet,nhitdet,ndet,ndata)
+c-----------------------------------------------------------------------
+c ANALYZER 2 : Encdali
+c-----------------------------------------------------------------------
+c  ID=1,8
+c
+c   W#: 1  2    3     4         5     6     7    8           9
+c       ID Araw Traw  
+c       
+c  ID=100
+c   W#: 1  2
+c       ID Multi
+c  ID
+c-----------------------------------------------------------------------
+
+c
+c
+c
+c
+c     ihit_min                  : the number of required data (ihit_min0)
+c     hitdet(1:nhitdet)         : hit detector id
+c     nhitdata(1:ndet)          : the number of data for each id 
+c     nhitdet                   : the number of hit detector
+c     ndet                      : the number of total detectors
+c     ndata                     : the length of rawdata array
+      IMPLICIT NONE
+      INCLUDE 'analyslogic.fh'
+c      INCLUDE 'daliprm.fh'
+
+      INTEGER nx, ny, ndet, ndata, naok
+      INTEGER rawdata(ndata,ndet)
+      INTEGER nhitdata(ndet)
+      INTEGER hitdet(ndet)
+      INTEGER nhitdet
+      REAL    val(nx,ny)
+
+c      CHARACTER ihitchara*4
+      INTEGER ihit_min0
+
+      INTEGER ihit, id
+
+      SAVE ihit_min0
+
+      IF (InitENCflag(2)) THEN
+c         CALL LOADDALIPRM
+c         CALL GETENV('IHIT_MIN0',ihitchara)
+c         READ(ihitchara,*) ihit_min0
+c         IF (ihit_min0.EQ.1) THEN
+c            WRITE(*,*) 'ENCDALI-M : IHIT_MIN0 = ', ihit_min0
+c         ELSE
+c            ihit_min0 = 3
+c            WRITE(*,*) 'ENCDALI-M : IHIT_MIN0 -> ', ihit_min0
+c         ENDIF
+         InitENCFlag(2) = .FALSE.
+c         DO i=1,186,1
+c            write(*,*)i,ped(i)+gain(i)*3840.
+c            write(*,*)i,(100.-ped(i))/gain(i),
+c     &           int((100.-ped(i))/gain(i)/2.)
+c            write(*,*)i, int((100.-ped(i))/gain(i)/2.)
+c         ENDDO
+      ENDIF
+
+      naok = 0
+
+      DO ihit = 1,nhitdet
+         id = hitdet(ihit)
+c         IF (id.GT.nch_dali) CYCLE
+c         IF (nhitdata(id).LT.ihit_min0) CYCLE ! ihit_min
+c         IF (rawdata(3,id).GT.1) CYCLE
+
+         naok = naok + 1
+         val(1,naok) = id
+         val(2,naok) = rawdata(1,id) ! Araw
+         val(3,naok) = rawdata(2,id)
+
+c         IF (val(2,naok).GT.0. .AND. val(3,naok).GT.0.) THEN
+c            mult = mult + 1
+c         ENDIF
+
+      ENDDO
+
+ccc Test
+      ID = 100
+
+      naok = naok + 1
+      val(1,naok) = id
+      val(2,naok) = 1234
+
+      RETURN
+      END
+
+c ======================================
+

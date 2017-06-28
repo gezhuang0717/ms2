@@ -1,0 +1,16 @@
+ht 129
+avy
+minimum 133 1.0005
+maximum 133 1.0015
+ht 133
+set plci 2
+hist/fit 133(58.:73.) p1 ! 2
+wait
+ht 130
+avy
+minimum 134 1.0005
+maximum 134 1.0015
+ht 134
+set plci 2
+hist/fit 134(55.:71.) p1 ! 2
+wait

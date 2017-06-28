@@ -1,0 +1,114 @@
+c =========================================================================
+      SUBROUTINE CALCDATA
+      IMPLICIT NONE
+c
+c Do not EDIT!! -->
+c
+      INTEGER naok(50)
+      REAL    val(500,500,50)
+      COMMON/ANALYSVALUE/ val,naok
+
+#include "analyslogic.fh"
+#include "analysevent.fh"
+#include "rawdata.fh"
+#include "commonprm.fh"
+#include "runstat.fh"
+
+c
+c Do not EDIT!! <--
+c
+
+c
+c EXTERNAL Statements
+c
+c User detectors
+      EXTERNAL Encdali
+c
+c Analyzer
+c
+      CALL Callanalyzer(12,12,Encdali)
+
+      RETURN
+      END
+c =========================================================================
+      SUBROUTINE END_RUN
+c                                             2010.May.15. S.Takeuchi 
+c
+c Do not EDIT!! -->
+      Integer naok(50)
+      Real    val(500,500,50)
+      Common/ANALYSVALUE/ val,naok
+#include "analyslogic.fh"
+#include "analysevent.fh"
+#include "commonprm.fh"
+#include "runstat.fh"
+c Do not EDIT!! <--
+c
+c INITENCFLAG(i) : i = analyzer number.
+c
+      IF (AnalyzerFlag(30)) THEN
+cCALL write_effmon()
+         WRITE(*,*)' '
+         WRITE(*,*)' ANAPAW-M : [END_RUN] is called.'
+         WRITE(*,*)' '
+      ENDIF
+
+      RETURN
+
+      END
+
+c =========================================================================
+      SUBROUTINE CALLANALYZER(analyzer,catid,enc)
+      IMPLICIT NONE
+
+#include "analyslogic.fh"
+#include "analysevent.fh"
+#include "rawdata.fh" 
+
+      INTEGER nx/500/,ny/500/,naok(50)
+      REAL    val(500,500,50)
+      COMMON/ANALYSVALUE/ val,naok
+
+      INTEGER analyzer
+      INTEGER catid
+
+      IF (.NOT. analyzerflag(analyzer)) GOTO 1000
+
+      IF (rawheadpos(catid).EQ.0) THEN
+         WRITE(*,*) ' ANAPAW-E : invalid rawheadpos(catid =',catid,
+     & ') in analyzer =',analyzer
+         GOTO 1000
+      ENDIF
+
+      IF (hitheadpos(catid).EQ.0) THEN
+         WRITE(*,*) ' ANAPAW-E : invalid hitheadpos(catid =',catid,
+     &') in analyzer =',analyzer
+         GOTO 1000
+      ENDIF
+c      WRITE(*,*)'ANAFLAG : ',analyzerflag(analyzer)
+
+      IF (catid.GE.21 .AND. catid.LE.28) THEN
+         CALL enc(val(1,1,analyzer),nx,ny,naok(analyzer),
+     &        rawdata(rawheadpos(catid)),nhitdata(hitheadpos(catid)),
+     &        hitdet(hitheadpos(catid)),
+     &        nhitdet(catid),ndet(catid),ndata(catid),analyzer,catid)
+      ELSE
+         CALL enc(val(1,1,analyzer),nx,ny,naok(analyzer),
+     &        rawdata(rawheadpos(catid)),nhitdata(hitheadpos(catid)),
+     &        hitdet(hitheadpos(catid)),
+     &        nhitdet(catid),ndet(catid),ndata(catid),analyzer)
+      ENDIF
+
+c      write(*,*)'Analyzer : ',analyzer
+c      write(*,*)'Catid    : ',catid
+c      write(*,*)'nhitdata : ',nhitdata(hitheadpos(catid))
+c      write(*,*)'hitdet   : ',hitdet(hitheadpos(catid))
+c      write(*,*)'nhitdet  : ',nhitdet(catid)
+c      write(*,*)'ndet     : ',ndet(catid)
+c      write(*,*)'ndata    : ',ndata(catid)
+c      write(*,*)'----'
+
+ 1000 CONTINUE
+
+      RETURN
+      END

@@ -1,0 +1,1 @@
+ifort -o cfdqr2_mod.f qrtrn.f mtxinv.f flval2.f

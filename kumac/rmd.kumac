@@ -1,0 +1,41 @@
+ macro rmd.kumac
+   set xsiz 40.00
+   set ysiz 21.00
+   set csiz 0.9
+   zone 4 3
+   ht 110
+   figa
+   ht 111
+   figa
+   ht 112
+   figa
+   ht 113
+   figa
+   ht 114
+   figa
+   ht 115
+   figa
+   ht 116
+   figa
+   ht 117
+   figa
+   ht 118
+   figa
+   ht 119
+   figa
+   ht 120
+   figa
+   ht 121
+   figa
+   ht 110
+   ht 111
+   ht 112
+   ht 113
+   ht 114
+   ht 115
+   ht 116
+   ht 117
+   ht 118
+   ht 119
+   ht 120
+   ht 121

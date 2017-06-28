@@ -1,0 +1,22 @@
+analys
+1
+4
+2
+xygate
+@,cut/pi.cut
+gate
+or
+and
+gate
+cccccc
+c PI c
+cccccc
+hst2
+0,	2,400,400,12, 2,132,132,22, 400,50.,56., 400,3000.,5000, 'TOF23 vs F3 IC'
+c
+0,	2,400,400,16, 2,400,400,22, 400,50.,60., 400,3000.,5000, 'TOF3S0 vs F3 IC'
+c
+hst1
+0, 2,308,308,3, 30000,0.,30., 'Schottky Trig. in nsec' 
+c
+end

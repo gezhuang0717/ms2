@@ -1,0 +1,85 @@
+      SUBROUTINE Loadmust2prm
+      IMPLICIT NONE
+      INCLUDE 'numbers.fh'
+      INCLUDE 'must2conf.fh'
+      INCLUDE 'must2pos.fh'
+      INTEGER ier
+      CHARACTER*132 prmfile
+      CHARACTER*132 prmname
+      INTEGER i,j,k,l
+      INTEGER nm
+      PARAMETER(nm=4)                   ! Calibration data are only MM1-4
+
+      do l=1,nm,1
+         do k = 1, 2, 1
+            do j = 2, 3, 1
+               if(k.eq.1 .and. j.eq.2) then  ! STRX
+                  WRITE(prmfile,10) l ! STRX E
+               else if(k.eq.1 .and. j.eq.3) then ! STRX
+                  WRITE(prmfile,30) l ! STRX T
+               else if(k.eq.2 .and. j.eq.2) then ! STRY
+                  WRITE(prmfile,20) l ! STRY E
+               else if(k.eq.2. and. j.eq.3) then 
+                  WRITE(prmfile,40) l ! STRY T
+               end if
+
+               OPEN(UNIT=80, FILE=prmfile, STATUS='old', ERR=1001)
+               do i=1, 128, 1
+                  if(j.eq.2) then
+                     read(80, *) prmname, m2prm(1,i,j,k,l),
+     &                    m2prm(2,i,j,k,l)
+                  else if(j.eq.3) then
+                     read(80, *) prmname, m2prm(1,i,j,k,l),
+     &                    m2prm(2,i,j,k,l), m2prm(3,i,j,k,l)
+                  end if
+
+c                  write(*,*) i,j,k,l,prmname, m2prm(1,i,j,k,l),
+c     &                 m2prm(2,i,j,k,l), m2prm(3,i,j,k,l)
+               end do
+               CLOSE(80)
+            end do
+         end do
+c         Call Read_flt_list(
+      end do
+
+ 10   FORMAT("src/prm/must2/Cal_Str_X_E_MM",I1,".cal")
+ 20   FORMAT("src/prm/must2/Cal_Str_Y_E_MM",I1,".cal")
+ 30   FORMAT("src/prm/must2/Cal_Str_X_T_MM",I1,".cal")
+ 40   FORMAT("src/prm/must2/Cal_Str_X_T_MM",I1,".cal")
+c
+      do i = 1,8
+         WRITE(prmfile,50) i    ! STRX E
+c         WRITE(*,*) prmfile
+         OPEN(UNIT=80, FILE=prmfile, STATUS='old', ERR=1001)
+         DO j=1,4
+            READ(80,*) EdgePos(i,j,1),EdgePos(i,j,2),EdgePos(i,j,3) 
+         ENDDO
+         CLOSE(80)
+      enddo
+
+ 50   FORMAT("src/prm/must2/pos/must2-",I1,"pos.prm")
+
+c      CALL Read_flt_list(80,plch2ns,2*npla,ier)
+c      IF (ier.NE.0) GOTO 1002
+c
+c     CALL Read_flt_list(80,plprm,3*npla,ier)
+c      IF (ier.NE.0) GOTO 1002
+
+      WRITE(*,*)' ANAPAW-M : [Loadmust2prm] Loaded parameters.'
+
+      RETURN
+
+ 1001 WRITE(*,'(2A)') ' ANAPAW-E : [Loadmust2prm] Cannot open file.', 
+     &     prmfile(1:Len_trim(prmfile))
+      STOP
+      RETURN
+
+ 1002 WRITE(*,*) 
+     &     ' ANAPAW-E : [Loadmust2prm] Error while reading parameters.'
+      CLOSE(80)
+      STOP
+      RETURN
+
+      END
+
+

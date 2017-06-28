@@ -1,0 +1,24 @@
+ macro vmany 1=101 2=102
+   sh rm -f vector/*
+* input variables
+   read 1 first histgram ID
+   read 2 final histgram ID
+   
+   do i=0,[2]-[1]
+     id = [1]+[i]
+     bin = $hinfo([id],'xbins')
+     xmin = $hinfo([id],'xmin')
+     xmax = $hinfo([id],'xmax')
+     vec/cre v([bin]) r
+     vec/cre x([bin]) r
+     get/con [id] v
+     do j=1,[bin]
+       xval = [xmin] + ([j]-1)*(([xmax]-[xmin])/[bin])
+       vec/input x([j]) [xval]
+     enddo
+     vec/write x,v vector/[id].dat 'F14.8,2X,F8.1'
+   enddo
+   
+* sh ./gfit_many
+   
+   return

@@ -1,0 +1,12 @@
+ macro integrate [id]
+   ent = $hinfo([id],'entries')
+   int = $hinfo([id],'sum')
+   eff = [int]/[ent]*100.
+   title = $htitle([id])
+   
+   mess ID      Entries   counts   ratio[%]    Title
+   mess [id]    [ent]     [int]    [eff]       [title]
+   
+ return
+ 
+   

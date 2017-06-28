@@ -1,0 +1,30 @@
+* output correlation coefficient of histgram
+ macro cor_coef_many
+   idi = 101
+   output = 'csv/correlation_coef.csv'
+   name = [output]
+* read HID
+   read idi first HID
+   idf = [idi]
+   read idf final HID
+   read name output file name
+   if ([name]=[output]) then
+   else
+     output = csv/[name]_correlation_coef.csv
+   endif
+
+   nhist = [idf]-[idi]
+   shell rm -rf [output]
+   fmess cor_coef,N,low,high,t0,title [output]
+   do i=0,[nhist]
+     id = [idi]+[i]
+     cor_coef [id] [output]
+*     hc [i]
+*     vec2d4cor_coef [i]
+*     shell cor_coef vec2d4cor_coef.dat
+   enddo
+   
+   mess output : [output]
+   
+ return
+ 

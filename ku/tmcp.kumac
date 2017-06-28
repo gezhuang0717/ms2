@@ -1,0 +1,119 @@
+macro gauss ID=10 TH=1 NAME='fit.ps' RES='fit.res' MIN=0 MAX=15000 
+*
+* input variables
+*
+if [ID]=10 then
+   read ID hist ID
+endif
+*if [TH]=10 then
+*   read TH thres
+*endif
+if [NAME]='fit.ps' then
+   read NAME output ps-file
+endif
+if [RES]='fit.res' then
+   read RES output result data
+endif
+if [MIN]=0 then
+   read MIN min
+endif
+if [MAX]=15000 then
+   read MAX max
+endif
+*
+* vector wo sakusei
+*
+v/cre para(10) R
+v/cre p(5) R
+v/cre XX(200) R
+v/cre tt(200) R
+v/cre er(200) R
+v/cre hist(50000) R 50000
+*
+*histgram no atai wo vector ni dainyu
+*
+hi/get_vect/content [ID] hist
+*
+*zu no settei
+*
+opt logy
+set fit 111
+opt fit
+zon 2 4
+fort/fil 88 [NAME]
+meta 88 -111
+output 77 [RES]
+*
+* fit each peak
+*
+tt(1)=0
+h=0
+i=0
+j=[MIN]
+*
+*[MIN] kara [MAX]
+*
+while [j]<15000 do
+  if hist([j])>[TH] then
+    k=[j]
+    while hist([j])>[TH]  do       
+      j=[j]+1
+      if ([j]>[MAX]) then 
+	breakl
+      endif	
+    endwhile
+    if [j]-[k]>0 .and. [k]>10 .and. [j]<[MAX] then
+       i=[i]+1
+       h=[h]+1
+*
+*LW ha likekifood wo imi suru
+*
+       hi/fit [ID]([k]:[j]) g LW 0 para
+       abc=[k]-30
+       def=[j]+30
+       hi/pl [ID]([abc]:[def])
+       ghi=para(2)-tt([i]-1)
+       if [i].eq.1 then
+        v/input tt([i]) para(2)
+        v/input er([i]) para(3)
+        v/input xx([i]) [h]
+       else
+        if [ghi]>350 then        
+         v/input tt([i]) para(2)
+         v/input er([i]) para(3)
+         if tt([i])-tt([i]-1)>400 then
+          i=[i]-1
+          v/fit xx(1:[i]) tt(1:[i]) ! p1 ! 0 p
+          i=[i]+1
+          v/write p(2)
+          mess ' '
+          jkl=int(((tt([i])-tt([i]-1))/p(2))+0.5)
+          h=[h]+[jkl]-1 
+          v/input xx([i]) [h]
+         else
+          v/input xx([i]) [h]
+         endif
+        else	 	 	 
+         i=[i]-1
+         h=[h]-1		 
+        endif			 
+       endif
+    endif
+  endif
+  j=[j]+1
+endwhile
+*
+* get coefficients
+*
+opt liny
+zon 1 1
+v/fit xx(1:[i]) tt(1:[i]) er(1:[i]) p1 ! 0 para 
+symbol xx(1:[i]) tt(1:[i]) [i]
+v/write xx(1:[i]),tt(1:[i])
+mess ' '
+v/write para(1:2)
+*
+close 88
+close 77
+output -1
+return

@@ -1,0 +1,105 @@
+hist = [1]
+xmin = [2]
+xmax = [3]
+ymin = [4]
+ymax = [5]
+opt  = [6]
+
+opt ndat      
+opt ngri
+opt nfit      
+opt nbox
+
+set xsize 17
+set ysize 15
+set xmgl 3.80
+set xmgr 1.50
+set ymgu 1.20
+set ymgl 2.50 
+set xlab 2.60
+set ylab 1.20
+set xwid 3.00
+set ywid 3.00
+set lwid 3.00
+** activate for logy --->
+* set xval 1.0
+set xval
+** activate for logy <---  
+
+set vfon -10
+set vsiz 0.60
+set lfon -130
+set asiz 0.70
+
+set bwid 5
+set hwid 3
+set hcol 1
+set ncol 32
+      
+histopt = 'AS'//[6]
+null [xmin] [xmax] [ymin] [ymax]  a 
+hist/plot [hist] [histopt]
+* set hwid 5; hi/plot 105 ashist;
+* set hwid 3; set htyp 545 ; hi/plot 2011 ashist
+tic xlyb  -300. -0. ! position of scale for (x,y)
+************
+* text embetted in Histgram --->
+set txfp -131
+set chhe 0.85
+* itx 10.5 2650 '(b)'
+itx -9.5 12.5 '(a)'
+* itx x(ch) y(ch) 'text'
+************
+atitle '[D]T !\133ns\135' '[D]E.ID ' ! 220
+
+      
+* atitle 'Beryllium A' 'Counts' ! 220
+atitle 'Carbon A\133A.U.\135' 'Counts' ! 220
+* atitle 'Nitrogen A' 'Counts' ! 220
+
+* atitle 'TOF(TGT-[D]E) !\133ns\135' '[D]E !\133ch\135' ! 220
+      
+* atitle 'Z' 'Counts(A.U.)' ! 220
+
+* atitle 'Channel' 'Counts/Channel' ! 220
+      
+* atitle '[D]E ! \133keV\135' 'Counts' ! 220
+* atitle 'X\302 ! \133mrad\135' 'A.U.' ! 220
+*  atitle 'Y\302 ! \133mrad\135' 'A.U.' ! 220
+      
+* atitle 'X !\133mm\135' 'X^\302 !\133mrad\135' ! 220
+      
+* atitle 'Y \133mm\135' 'A.U.' ! 220
+* atitle 'TOF(F2-F3) \133ns\135' 'A.U.' ! 220
+* atitle 'Beryllium A' 'Counts' ! 220
+* atitle 'Carbon A' 'Counts' ! 220
+* atitle 'Nitrogen A' 'Counts' ! 220
+* atitle 'Beryllium A \133A.U.\135' 'E?cm! \133keV\135' ! 220
+* atitle 'Carbon A \133A.U.\135' 'E?cm! \133keV\135' ! 220
+* atitle 'Nitrogen A \133A.U.\135' 'E?cm! \133keV\135' ! 220
+      
+* atitle '' '' ! 220
+* atitle 'Doppler corrected E?[g]   !\133keV\135' 'Counts/4keV' ! 220
+* atitle 'Carbon  isotope  mass  number' 'Counts' ! 220
+* atitle 'Channel' 'Counts/Channel' ! 220
+* atitle 'F2-F3 TOF  !\133ns\135' 'F2PL.\74A\76  !\133ch\135' ! 220
+* atitle 'Y !\133mm\135' 'Y^\302 !\133mrad\135' ! 220
+* atitle 'X !\133mm\135' 'X^\302 !\133mrad\135' ! 220
+* atitle 'X !\133mm\135' 'Y !\133mm\135' ! 220
+* atitle 'X !\133mm\135' 'Counts' ! 220
+* atitle 'TXsum !\133ns\135' 'Counts' ! 220
+* atitle 'TOF(TGT-[D]E) !\133ns\135' '[D]E !\133ch\135' ! 220
+* atitle 'Z' 'Counts' ! 220
+* atitle 'TOF(TGT-[D]E) !\133ns\135' 'E !\133ch\135' ! 220
+*  atitle 'Carbon A !\133A.U.\135' 'Counts' ! 220
+*  atitle 'Bellirium A !\133A.U.\135' 'Counts' ! 220
+* atitle '[D]T !\133ns\135' '[D]E.ID ' ! 220
+* atitle '[D]T_{E#6} !\133ns\135' 'Position of [D]E Counter!\133cm\135' ! 220
+* atitle '[D]T !\133ns\135' '[D]E.ID' ! 220
+*     atitle 'E?LAB! \133keV\135' 'T?slew! \133ns\135' ! 220
+* atitle 'T?slew! \133ns\135' 'Counts' ! 220
+
+* exe ~/analyse/.analogon.kumac 
+
+
+

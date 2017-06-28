@@ -1,0 +1,34 @@
+macro fitsqrt
+
+
+bin   = $hinfo([1],'xbins')
+xmin  = $hinfo([1],'xmin')
+xmax  = $hinfo([1],'xmax')
+
+xwidth = ([xmax]-[xmin])/[bin]
+mess [xwidth]
+
+v/cre xwid(1)
+xwid(1)= [xwidth]
+	
+application comis quit
+C
+      real Function square(x)
+      real x
+      real amp,center,sigma
+      common/PAWPAR/par(1)
+
+      square = par(1)*sqrt(x)
+
+      End
+
+quit
+
+
+vec/cre par(1)   R  1.e5 
+vec/cre ste(1)   R  1.e-4 
+vec/cre min(1)   R  0.01
+vec/cre max(1)   R  1000.
+vec/cre err(1)   R  10   
+
+hi/fit [1](0.:1400..) square BE 1 par ste min max err

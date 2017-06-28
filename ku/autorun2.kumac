@@ -1,0 +1,17 @@
+*book ana/gamma.ana
+*
+ana/loop ./rdf/0026.rdf b ; mess RUN 26 end.
+ana/loop ./rdf/0027.rdf b ; mess RUN 27 end.
+ana/loop ./rdf/0028.rdf b ; mess RUN 28 end.
+ana/loop ./rdf/0029.rdf b ; mess RUN 29 end.
+ana/loop ./rdf/0030.rdf b ; mess RUN 30 end.
+ana/loop ./rdf/0031.rdf b ; mess RUN 31 end.
+ana/loop ./rdf/0032.rdf b ; mess RUN 32 end.
+ana/loop ./rdf/0033.rdf b ; mess RUN 33 end.
+ana/loop ./rdf/0034.rdf b ; mess RUN 34 end.
+ana/loop ./rdf/0035.rdf b ; mess RUN 35 end.
+ana/loop ./rdf/0036.rdf b ; mess RUN 36 end.
+ana/loop ./rdf/0037.rdf b ; mess RUN 37 end.
+ana/loop ./rdf/0038.rdf b ; mess RUN 38 end.
+*
+*hstore gamma141219.hbk

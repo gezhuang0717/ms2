@@ -1,0 +1,5 @@
+rm -rf vread_v1
+gcc -O2 -o vread_v1 vread02.c lfitd.c gaussjd.c covsrtd.c nrutild.c -lm
+#gcc -O2 -o vread vread.c lfitd.c gaussjd.c covsrtd.c nrutild.c -lm
+#icc -O2 -o vread vread.c lfitd.c gaussjd.c covsrtd.c nrutild.c
+cp vread_v1 ../vread_v1

@@ -1,0 +1,18 @@
+analys
+1
+2
+4
+5
+xygate
+@,cut/pi.cut
+gate
+or
+and
+hst1
+0, 2,212,212,2 300,700,1000, 'E-MCP QTC Lead'
+0, 2,212,212,5 2000,0,2000, 'E-MCP QTC Trad'
+0, 2,212,212,8 2000,0,200, 'E-MCP T Acqris in ns'
+0, 2,212,212,15 590,10,600, 'E-MCP QTC'
+hst2
+0, 2,212,212,15, 2,212,212,8, 300,10,600, 200,150,200, 'E-MCP T vs Q'
+end

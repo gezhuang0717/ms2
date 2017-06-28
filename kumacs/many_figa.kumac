@@ -1,0 +1,21 @@
+ macro manyfiga 1=101 2=101
+   3='figa.res'
+* input ID
+   read 1 first histgram ID
+   read 2 final histgram ID
+   
+   output 77 [3]
+   do i=0,[2]-[1]
+     id = [1]+[i]
+     ht [id]
+     call mess.f(77,'TITLE:' $htitle([id]))
+* hsta
+     figa
+   enddo
+   close 77
+ output -1
+   mess output : [3]
+     
+   return
+ 
+   

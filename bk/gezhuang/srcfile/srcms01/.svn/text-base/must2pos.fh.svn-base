@@ -1,0 +1,13 @@
+c position of the edge of the Must2 relative to the target position
+      REAL EdgePos(8,4,3)
+      Integer NStrip
+      parameter (NStrip = 128)
+c EdgePos(Must2ID,EdgeID,PosID)
+c EdgeID 1: X1Y1
+c        2: X1Y128
+c        3: X128Y1
+c        4: X128Y128
+c
+c PosID: 1-3: x-z
+
+      COMMON/M2POS/ EdgePos

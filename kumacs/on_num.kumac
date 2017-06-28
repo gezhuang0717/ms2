@@ -1,0 +1,30 @@
+ macro on [1]
+ cle f
+* book ana/[1].ana
+ book ana/90.ana
+* book ana/75.ana 'saitama CSI in'
+  a/l data/00[1].rdf
+* Carbon foil
+*  a/l data/0066.rdf B
+*  a/l data/0067.rdf B
+*  a/l data/0068.rdf B
+*  a/l data/0069.rdf B
+*  a/l data/0070.rdf B
+*  a/l data/0071.rdf B
+*  a/l data/0072.rdf B
+*  a/l data/0073.rdf B
+*  a/l data/0074.rdf B
+** a/l data/0075.rdf B !CSI 2mmt
+** a/l data/0076.rdf B !CSI 2mmt
+*  a/l data/0077.rdf B
+*  a/l data/0079.rdf B
+*  a/l data/0080.rdf B
+*  a/l data/0081.rdf B
+* *** Aluminized mylar for both sides ***
+* a/l data/0085.rdf B
+* a/l data/0086.rdf B
+* a/l data/0087.rdf B
+* a/l data/0088.rdf B
+* a/l data/0089.rdf B
+* a/l data/0094.rdf B
+  

@@ -1,0 +1,26 @@
+      integer nPPAC, nLayer
+      parameter(nPPAC = 24)
+      parameter(nLayer = 8)
+
+      Real      PPAC_ch2ns(5,nPPAC), PPAC_qped(5,nPPAC)
+
+      Integer   iflag_inside_offset, iflag_outside_offset
+      Real      Xinoffset(nPPAC), Yinoffset(nPPAC)
+      Real      Xoutoffset(nPPAC), Youtoffset(nPPAC)
+      Real      ns2mm(2,nPPAC)
+      real      PPAC_zpos(2,nPPAC)! x,y
+      Integer   iflag_geom_offset
+      Real      geomoffset(2,nPPAC)
+      real      TXsumgate(2,nPPAC),TYsumgate(2,nPPAC)
+      Real      ZPOS(2,nLayer)
+      logical   iflag_txsumgate, iflag_tysumgate
+
+      Common/PPACPRM/
+     &    PPAC_ch2ns, PPAC_qped,
+     &    iflag_outside_offset, Xoutoffset, Youtoffset,
+     &    iflag_inside_offset, Xinoffset, Yinoffset,
+     &    ns2mm,PPAC_zpos,
+     &    iflag_geom_offset, geomoffset,
+     &    TXsumgate,TYSumgate,
+     &    ZPOS,iflag_txsumgate, iflag_tysumgate
+     

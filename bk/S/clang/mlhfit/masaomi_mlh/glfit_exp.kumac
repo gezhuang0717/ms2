@@ -1,0 +1,89 @@
+* Created       : Thu, 10 May 2012 17:02:26 +0900, by nagashima
+* Last Modified : Sun, 20 May 2012 19:36:48 +0900, by ana
+
+macro glfit hist min max
+* E fitting macro.
+* Initial values are required in this code.
+	IF ([3].eq.'') THEN
+		mess 'Error: Invalid number of arguments.'
+		exitm
+	endif
+
+	pos = $INDEX([min], '.')
+	if ([pos].eq.0) then
+		min = [min].
+	endif
+
+	pos = $INDEX([max], '.')
+	if ([pos].eq.0) then
+		max = [max].
+	endif
+
+
+* Edit following parameters. 
+* f(x) = a  + b*exp(x/c) 
+* Initial, Min, Max and Step should be specified for each parameter.
+        a_init = 1     ; a_min = 0  ; a_max = 5     ; a_step = 0
+* slope_init =0     ; slope_min = 0     ; slope_max = 0     ; slope_step = 0.1
+        b_init = 5.3672     ; b_min = 5.3     ; b_max = 5.5     ; b_step = 0.0001
+        c_init = -0.159    ; c_min = -0.17   ; c_max = -0.15    ; c_step = 0.0001
+* * sigma_init = 3.0 ; sigma_min = 2.65 ; sigma_max = 3.2 ; sigma_step = 0.01
+* * Double Gaussian mode
+* * A2_init = 0.0     ; A2_min = 0.0     ; A2_max = 0.0     ; A2_step = 0.0
+* * mu2_init = 0.0    ; mu2_min = 0.0    ; mu2_max = 0.0    ; mu2_step = 0.0
+* * sigma2_init = 0.0 ; sigma2_min = 0.0 ; sigma2_max = 0.0 ; sigma2_step = 0.0
+
+	vector/create par(50) ; vect/create pare(50) 
+	vector/create pmin(50) ; vect/create pmax(50)
+	vector/create step(50)
+	vector/input  PAR(1)  [a_init] 
+	vector/input PMIN(1)  [a_min]  
+	vector/input PMAX(1)  [a_max]  
+	vector/input STEP(1)  [a_step] 
+	vector/input PAR(2:3) [b_init] [c_init]
+	vector/input PMIN(2:3) [b_min] [c_min]  
+	vector/input PMAX(2:3) [b_max] [c_max]  
+	vector/input STEP(2:3) [b_step] [c_step] 
+* * vect/input   PAR(1:3) [A_init] [mu_init] [sigma_init]
+* * vect/input  PMIN(1:3) [A_min]  [mu_min]  [sigma_min]
+* * vect/input  PMAX(1:3) [A_max]  [mu_max]  [sigma_max]
+* * vect/input  STEP(1:3) [A_step] [mu_step] [sigma_step]
+* * vect/input   PAR(6:8) [A2_init] [mu2_init] [sigma2_init]
+* * vect/input  PMIN(6:8) [A2_min]  [mu2_min]  [sigma2_min]
+* * vect/input  PMAX(6:8) [A2_max]  [mu2_max]  [sigma2_max]
+* * vect/input  STEP(6:8) [A2_step] [mu2_step] [sigma2_step]
+	
+* exp
+        histogram/fit [hist]([min]:[max]) P0+E B 3 PAR step(1:3) pmin pmax PARE(1:3) 
+* * single Gaussian
+* * histogram/fit [hist]([min]:[max]) P1+G B 5 PAR step(1:5) pmin pmax PARE(1:5)
+* * Double Gaussian
+* * hist/fit [hist]([min]:[max]) P1+G B 5 PAR step(1:5) pmin pmax PARE(1:5)
+
+	* Output result
+	a = par(1) ; ae = pare(1)
+* slope  = par(2) ; slopee  = pare(2)
+	b = par(2) ; be = pare(2)
+        c = par(3) ; ce = pare(3)
+* sigma  = par(5) ; sigmae  = pare(5)
+* * amp    = par(1) ; ampe    = pare(1)
+* * mean   = par(2) ; meane   = pare(2)
+* * sigma  = par(3) ; sigmae  = pare(3)
+* fwhm   = [sigma]*2.355 ; fwhme = [sigmae] * 2.355
+	message '  b    = ' $format([b],F7.3) '+-' $format([be],F7.3)
+	message '  c    = ' $format([c],F7.3) '+-' $format([ce],F7.3)
+* message '  Sigma  = ' $format([sigma], F7.3) '+-' $format([sigmae], F7.3)
+* message '  FWHM   = ' $format([fwhm],F7.3) '+-' $format([fwhme],F7.3)
+	message '  B.G.   = ' $format([a],F7.3) '+-' $format([ae],F7.3)
+* mess '  B.G. Itrcept = ' $format([itrcpt],F7.3) '+' $format([itrcpte],F8.5) '*x'
+* * mess '       Slope   = ' $format([slope],F7.3) '+' $format([slopee],F8.5) '*x'
+
+
+	 hi/pl [hist]([min]:[max])
+	
+	vector/delete par
+	vector/delete pare
+	vector/delete step
+	vector/delete pmin
+	vector/delete pmax
+return

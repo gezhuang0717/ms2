@@ -1,0 +1,22 @@
+*** Begin of history file: Mon Dec 21 10:41:24 2015
+book ana/ring.ana
+ana/l ridf/run0128mod.ridf
+i
+ht 133
+xfitg
+htp
+xiftg
+xfitg
+xfitg
+i
+sh
+clear
+book ana/ring.ana
+ana/l ridf/run0128mod.ridf
+i
+ht 108
+hn
+hb
+blo
+exit
+*** End   of history file: Mon Feb 15 15:01:35 2016

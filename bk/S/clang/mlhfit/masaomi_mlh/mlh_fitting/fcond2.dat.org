@@ -1,0 +1,8 @@
+expresult.dat !fitting result
+expoutput.dat !output data
+expdata.dat   !read data(experimental data)
+1,50          !read region
+2,2           !number of parameters,free parameters 
+1,50          !fitting region
+1,2         !order of parameters  
+17.d0,1.d0 !initial valus

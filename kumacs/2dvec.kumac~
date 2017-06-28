@@ -1,0 +1,40 @@
+* output text from 2-dimensional plot
+ macro 2dv [id]
+   output=2dvec.dat
+* read HID
+* read id input HID
+   hc [id]
+* read HINFO
+   xmin = $hinfo([id],'xmin')
+   xmax = $hinfo([id],'xmax')
+   xbin = $hinfo([id],'xbins') 
+   ymin = $hinfo([id],'ymin')
+   ymax = $hinfo([id],'ymax')
+   ybin = $hinfo([id],'ybins') 
+   
+   xw = ([xmax]-[xmin])/[xbin]
+   yw = ([ymax]-[ymin])/[ybin]
+   
+* create/input/write vector
+   v/cre xx([xbin],[ybin]) r
+   v/cre yy([xbin],[ybin]) r
+   v/cre v([xbin],[ybin]) r
+   get/con [id] v
+   
+   shell rm -rf [output]
+   do i=1,[xbin]
+     xval = ([i]-1)*[xw] + [xmin]
+     do j=1,[ybin]
+       yval = ([j]-1)*[yw] + [ymin]
+       v/input xx([i],[j]) [xval]
+       v/input yy([i],[j]) [yval]
+       c = v([i],[j])
+* fmess [xval],[yval],[c] [output]
+     enddo
+   enddo
+   
+ v/w  xx,yy,v [output] 'F14.8,2X,F14.8,2X,F8.1'
+   mess output : [output]
+   
+ return
+ 

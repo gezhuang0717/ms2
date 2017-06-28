@@ -1,0 +1,97 @@
+ macro fgamany id1=101 output='csv/fit.csv'
+   
+   name = [output]
+   read id1 first histgram ID
+   id2 = [id1]+1
+   read id2 final histgram ID
+   read name output file name
+   if ([name]=[output]) then
+* if ([name]='') then
+* output = [output]
+   else
+     output = csv/[name]_fit.csv
+   endif
+
+   sh rm -rf [output]
+   nhist = [id2]-[id1]+1
+
+   v/cre para(3) R
+*   v/cre erpara(3) R
+*   v/cre dumy(3) R
+*   v/cre p1([nhist]) R
+*   v/cre p2([nhist]) R
+*   v/cre p3([nhist]) R
+*   v/cre erp1([nhist]) R
+*   v/cre erp2([nhist]) R
+*   v/cre erp3([nhist]) R
+   
+   fmess HID,Const,err,Mean,err,Sigma,err,Title [output]
+   do i=1,[nhist]
+     v/cre erpara[i](3) R
+     do j=1,3
+       v/input para([j]) 0
+       v/input erpara[i]([j]) 0
+     enddo
+* v/cre erpara(3) R
+* ervec = 'erpara'
+* v/cre [ervec][i](3) R
+     ervec = erpara[i]
+
+
+     id = [id1]+[i]-1
+     xmin = $hinfo([id],'xmin')
+     xmax = $hinfo([id],'xmax')
+* hi/fit [id]([xmin].:[xmax].) g "" 0 para "" "" "" erpara
+     hi/fit [id]([xmin].:[xmax].) g '0' 0 para "" "" "" [ervec] 'Do not plot the result'
+* hi/fit [id]([xmin].:[xmax].) g "" 0 para "" "" "" [ervec] 'Plot the result'
+*     hid([i]) = [id]
+*     p1([i]) = para(1)
+*     p2([i]) = para(2)*1.E+3
+*     p3([i]) = para(3)*1.E+3
+*     erp1([i]) = erpara(1)
+*     erp2([i]) = erpara(2)*1.E+3
+*     erp3([i]) = erpara(3)*1.E+3
+*     title([i]) = $htitle([id])
+*     call init.f(p1([i]),erp1([i]),erp2([i]),erp3([i]))
+     p1 = para(1)
+     p2 = para(2)
+     p3 = para(3)
+*     erp1 = erpara(1)
+*     erp2 = erpara(2)*1.E+3
+* erp3 = erpara(3)*1.E+3
+     erp1 = [ervec](1)
+     erp2 = [ervec](2)
+     erp3 = [ervec](3)
+     title = $htitle([id])
+* call init.f(p1,erp1,erp2,erp3)
+* write all parameters
+* fmess [id],[p1],[erp1],[p2],[erp2],[p3],[erp3],[title] [output]
+* write only id,mean,sigma,title
+     fmess [id],[p2],[p3],[title] [output]
+* v/del [ervec]
+* 
+*     v/input p1([i]) para(1)
+*     v/ope/vscal para(2) 1.e+3 p2([i]) 'ns to ps'
+*     v/ope/vscal para(3) 1.e+3 p3([i]) 'ns to ps'
+*     v/input erp1([i]) erpara(1)
+*     v/ope/vscal erpara(2) 1.e+3 erp2([i]) 'ns to ps'
+* v/ope/vscal erpara(3) 1.e+3 erp3([i]) 'ns to ps'
+   enddo
+   
+* for IC fitting analysis
+   do i=1,2
+     id=118+[i]-1
+     hi/fit [id](8000.:10000..) g '0' 0 para "" "" "" [ervec] 'Do not plot the result'
+     fmess [id],[p2],[p3],[title] [output]
+   enddo
+
+   
+*   do i=1,[nhist]
+*     fmess [hid([i])],[p1([i])],[erp1([i])],[p2([i])],[erp2([i])],[p3([i])],[erp3([i])],[title([i])] [output]
+*   enddo
+   
+* v/w p1,erp1,p2,erp2,p3,erp3,title [output] 'F6.2,2X,F6.2,2X,F6.2,2X,F6.2,2X,F6.2,2X,F6.2,2X,'
+* mess output : [output]
+   shell ./kumac/4fga [output]
+   
+   return

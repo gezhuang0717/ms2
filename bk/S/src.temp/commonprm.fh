@@ -1,0 +1,42 @@
+      LOGICAL ihitflag
+      INTEGER block_clock
+      Real f21x, f21y
+      Real f22x, f22y
+      Real f31ax, f31ay
+      Real f31bx, f31by
+      Real f32ax, f32ay
+      Real f32bx, f32by
+      Real f4x, f4y
+      Real f51ax, f51ay
+      Real f51bx, f51by
+      Real f52ax, f52ay
+      Real f52bx, f52by
+      Real f6x, f6y
+      Real fh9tref, fh10tref
+      Real fh9x, fh9y
+      Real fh10x, fh10y
+      Real s0x, s0y
+      Real ilc1x, ilc1y
+      Real ilc2x, ilc2y
+      Real ELC_UT, ELC_DT
+
+      COMMON/COMMONPRM/ ihitflag,block_clock,
+     &                  f21x, f21y,
+     &                  f22x, f22y,
+     &                  f31ax, f31ay,
+     &                  f31bx, f31by,
+     &                  f32ax, f32ay,
+     &                  f32bx, f32by,
+     &                  f4x, f4y,
+     &                  f51ax, f51ay,
+     &                  f51bx, f51by,
+     &                  f52ax, f52ay,
+     &                  f52bx, f52by,
+     &                  f6x, f6y,
+     &                  fh9tref,fh10tref,
+     &                  fh9x, fh9y,
+     &                  fh10x, fh10y,
+     &                  s0x, s0y,
+     &                  ilc1x, ilc1y,
+     &                  ilc2x, ilc2y,
+     &                  ELC_UT, ELC_DT

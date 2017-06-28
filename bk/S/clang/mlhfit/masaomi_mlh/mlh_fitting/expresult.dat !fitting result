@@ -1,0 +1,27 @@
+ output file : expresult.dat !fitting result expoutput.dat !output data    
+Data file name : expdata.dat   !read data(exper                    
+ Number of points of data =  0
+ Number of parameters =  2
+ Number of free parameters =  2
+ Fitting region :  1 ->  50
+ Initial value of free parameters
+  AAI( 1) =  0.1700000000E+02
+  AAI( 2) =  0.1000000000E+01
+
+
+ Fitting region(ch) :  1 -->  50
+ Fitting region (arb.) :   1. -->  -2400.
+ Free parameters 
+  AA( 1) =               NAN +-               NAN
+  AA( 2) =               NAN +-               NAN
+ chisq =   NAN
+ reduced chisq =   NAN
+
+
+ Fitting region(ch) :  1 -->  50
+ Fitting region (arb.) :   1. -->  -2400.
+ Free parameters 
+  AA( 1) =               NAN +-               NAN
+  AA( 2) =               NAN +-               NAN
+ chisq =   NAN
+ reduced chisq =   NAN

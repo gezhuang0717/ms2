@@ -1,0 +1,4 @@
+rm -rf gfit
+gcc -O2 -o gfit gfit.c fgaussd_mod.c mrqmind.c mrqcofd.c gaussjd.c covsrtd.c ran1d.c nrutild.c -lm
+#gcc -O2 -o gfit test.c fgaussd.c mrqmind.c mrqcofd.c gaussjd.c covsrtd.c gasdevd.c ran1d.c nrutild.c -lm
+cp gfit ../gfit

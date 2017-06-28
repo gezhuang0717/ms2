@@ -1,0 +1,103 @@
+result/28si_ff.r
+result/28si_ff.s
+data/28si_ff.dat
+0 183
+5 5
+4 154
+1 2 3 4 5
+3586.08
+2.86307
+123.69
+1548.77
+2.3802
+
+
+
+result/28si_d_b.r
+result/28si_d_b.s
+data/28si_d.dat
+0 902
+2 2
+534 595
+1 2
+83.1032
+0.0937933
+
+
+result/28si_d.r
+result/28si_d.s
+data/28si_d.dat
+0 902
+5 5
+406 595
+1 2 3 4 5
+368.728
+8.89374
+498.404
+83.1032
+0.0937933
+
+
+result/28si_s_b.r
+result/28si_s_b.s
+data/28si_s.dat
+0 1330
+2 2
+795 874
+1 2
+105.135
+0.0403818
+
+
+result/28si_s.r
+result/28si_s.s
+data/28si_s.dat
+0 1330
+5 5
+668 874
+1 2 3 4 5
+494.199
+8.5865
+766.416
+105.135
+0.0403818
+
+
+
+result/28si_f_b.r
+result/28si_f_b.s
+data/28si_f.dat
+0 1186
+2 2
+638 827
+1 2
+120.394
+-0.034937
+
+
+
+result/28si_f.r
+result/28si_f.s
+data/28si_f.dat
+0 1186
+5 5
+518 827
+1 2 3 4 5
+520.75
+7.48846
+607.438
+120.394
+-0.034937
+
+
+result/28si_ff_b.r
+result/28si_ff_b.s
+data/28si_ff.dat
+0 183
+2 2
+4 107
+1 2
+1548.77
+2.3802
+
+

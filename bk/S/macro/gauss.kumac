@@ -1,0 +1,76 @@
+macro gauss 1=10 2=100 3='fit.ps' 4='fit.res'
+*
+* input variables
+*
+if [1]=10 then
+   read 1 hist ID
+endif
+*if [2]=10 then
+*   read 2 thres
+*endif
+if [3]='fit.ps' then
+   read 3 output ps-file
+endif
+if [4]='fit.res' then
+   read 4 output result data
+endif
+*
+* init variables
+*
+v/cre para(10) R
+* 10 times smaller !!!
+v/cre xx(200) R 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170 180 190 200 210 
+v/cre tt(200) R
+v/cre hist(5000) R 5000*0
+hi/get_vect/content [1] hist
+*
+opt logy
+set fit 111
+opt fit
+zon 2 4
+fort/fil 88 [3]
+meta 88 -111
+output 77 [4]
+*
+* fit each peak
+*
+i=0
+ j=1
+while [j]<4096 do
+  if hist([j])>[2] then
+    k=[j]
+    while hist([j])>[2]  do       
+      j=[j]+1
+      if ([j]>4096) then 
+	breakl
+      endif	
+    endwhile
+    if [j]-[k]>0 .and. [k]>500 .and. [j]<4000 then
+* if [j]-[k]>0 .and. [k]>10 .and. [j]<4000 then
+* if [j]-[k]>0 .and. [k]>10 .and. [j]<3950 then
+*    if [j]-[k]>1 .and. [j]<100 then
+       i=[i]+1
+       hi/fit [1]([k]:[j]) g LW 0 para
+       abc=[k]-30
+       def=[j]+30
+       hi/pl [1]([abc]:[def])
+        v/input tt([i]) para(2)
+    endif
+  endif
+  j=[j]+1
+endwhile
+*
+* get coefficients
+*
+opt liny
+zon 1 2
+v/fit tt(1:[i]) xx(1:[i]) ! p1 ! 0 para
+symbol tt(1:[i]) xx(1:[i]) [i]
+v/write tt(1:[i])
+mess ' '
+v/write para(1:2)
+*
+close 88
+close 77
+output -1
+return

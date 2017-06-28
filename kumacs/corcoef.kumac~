@@ -1,0 +1,21 @@
+* output text from 2-dimensional plot
+ macro 2dvec
+   idi = 101
+   output = correlation_coef.csv
+   shell rm -rf [output]
+* read HID
+   read idi first HID
+   idf = [idi]
+   read idf final HID
+   nhist = [idf] - [idi]
+
+   do i=1,[nhist]
+     hc [i]
+     vec2d [i]
+     shell cor_coef vec2d.dat
+   enddo
+   
+   mess output : [output]
+   
+ return
+ 

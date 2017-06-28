@@ -1,0 +1,11 @@
+ macro figa [id]
+   
+ v/cre par(3)
+   ht [id]
+   xmin = $hinfo([id],'xmin')
+   xmax = $hinfo([id],'xmax')
+   hi/fit [id]([xmin].:[xmax].) gauss.f ! 3 par
+ v/print par
+   
+   
+   return

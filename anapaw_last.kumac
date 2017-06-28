@@ -1,0 +1,120 @@
+*** Begin of history file: Tue Jun 27 22:20:39 2017
+exe ./mass.kumac
+exe ./kumac/mass.kumac
+i
+ht 101
+hn colz
+hn colz
+hn colz
+hb cozl
+hn
+xf
+hn colz
+hb colz
+hn colz
+hn colz
+hb colz
+hnc olz
+hn cozl
+xf
+hn colz
+xf
+hn colz
+hn cozl
+hn
+hn
+hn
+hb colz
+xf
+hn colz
+xf
+hn colz
+hn colz
+opt sta
+ht
+hn clz
+hn clz
+hn clz
+hn clz
+htp colz
+color 8 1 1 1 1
+htp colz
+lgz
+htp colz
+hsta
+ht
+min 0 0.1
+htp colz
+set mtyp 28
+ht
+set mscf 0.5
+ht
+set mtyp 29
+ht
+set mscf 0.3
+ht
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+xf
+hn
+hn
+hb
+hn
+xf
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+set nsta
+nsta
+opt nsta
+ht
+hn
+opt sta
+ht
+hn
+hn
+hn
+hb
+hn
+hb
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+hn
+exit
+*** End   of history file: Tue Jun 27 22:41:27 2017

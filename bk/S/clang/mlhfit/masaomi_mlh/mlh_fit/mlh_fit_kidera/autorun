@@ -1,0 +1,45 @@
+#!  /bin/sh
+#   File:       run
+#   Target:     mlhfit
+#   Sources:    main.f
+#               cfdqr2.f
+#               mtxinv.f
+#               qrtrn.f
+#               flval2.f
+#               coef.f
+#               exp.f
+#               dexp.f
+#               d2exp.f
+
+rm fcond.dat
+if test $1
+   then cp    fcond/$1       fcond.dat
+   else echo "Key in fcond.dat"
+        read dfile
+        cp    fcond/$dfile   fcond.dat
+fi
+
+rm result/test.r
+rm result/test.s
+rm mlhfit.f
+echo "mlhfit run started"
+echo "Line fitting ?"
+echo "(yes or no. null means yes.)"
+read key
+case $key in
+   no ) echo "Gauss + line fitting start"
+        cat main.f cfdqr2.f mtxinv.f qrtrn.f > mlhfit.f
+        cat flval2.f coef.f >> mlhfit.f
+        cat exp.f dexp.f d2exp.f >> mlhfit.f
+        f77 -o mlhfit mlhfit.f
+        mlhfit;;
+
+   *  ) echo "Line fitting start"
+        cat main.f cfdqr2.f mtxinv.f qrtrn.f > mlhfit.f
+        cat flval2.f coef.f >> mlhfit.f
+        cat line.f dline.f d2line.f >> mlhfit.f
+        f77 -o mlhfit mlhfit.f
+        mlhfit;;
+
+esac
+echo "mlhfit run finished"

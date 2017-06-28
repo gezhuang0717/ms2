@@ -1,0 +1,9 @@
+c -----------------------------------
+c ch2MeV modified at 11/12 21:30
+c MeV = ch2MeV(1) + ch2MeV(2) * ch
+c uodated 12/27 15:16 Matsushita
+c FocusID, ch2mev(1), ch2mev(2)
+2,  0.0     0.0
+3,  0.0     0.0
+7,  1.21106 0.00256
+11, 1.7856  0.00531

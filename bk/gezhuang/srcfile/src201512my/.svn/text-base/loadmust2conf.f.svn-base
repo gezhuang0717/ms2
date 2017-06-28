@@ -1,0 +1,46 @@
+      SUBROUTINE Loadmust2conf
+      IMPLICIT NONE
+      INTEGER ier
+      INTEGER tmp1,tmp2,tmp3
+      CHARACTER*132 prmfile,confname
+
+      INCLUDE 'numbers.fh'
+      INCLUDE 'must2conf.fh'
+
+      ier = 0
+      CALL Getenv('MUST2_CONFIG',prmfile)
+      OPEN (UNIT=80, FILE=prmfile, STATUS='old',ERR=1001)
+
+      DO WHILE (ier.EQ.0)
+         CALL Skip_comment(80)
+         READ(80,*,END=1000)confname
+         OPEN (UNIT=90, FILE=confname, STATUS='old',ERR=1001)
+         DO WHILE (ier.EQ.0)
+            READ(90,*,END=999)tmp1,tmp2,tmp3
+            m2dtype(0,tmp1) = tmp1
+            m2dtype(1,tmp1) = tmp2
+            m2dtype(2,tmp1) = tmp3
+         ENDDO
+         CLOSE(90)
+ 999     CONTINUE
+      ENDDO
+      
+ 1000 WRITE(*,*)' ANAPAW-M : [Loadmust2conf] Loaded parameters.'
+
+      CLOSE(80)
+      RETURN
+
+ 1001 WRITE(*,'(2A)')' ANAPAW-E : [Loadmust2conf] Cannot open file.', 
+     &     prmfile(1:Len_trim(prmfile))
+      RETURN
+
+ 1002 WRITE(*,*)
+     &     ' ANAPAW-E : [Loadmust2conf] Error while reading parameters.'
+      CLOSE(80)
+      STOP
+      RETURN
+
+      END
+
+
+

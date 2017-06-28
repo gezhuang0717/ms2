@@ -1,0 +1,43 @@
+      REAL    ppacdata(5,5)
+      REAL    tofdata(20),aoqdata(4,20)
+      INTEGER notof,noaoq
+      INTEGER trig(16)
+      INTEGER gatconf
+      REAL    mm_left_plf7, mm_left_ppac
+
+      COMMON/FORTREE/ppacdata,tofdata,aoqdata,notof,noaoq,
+c     & trig,
+     &     gatconf,mm_left_plf7,mm_left_ppac
+
+c
+c ppacdata(i,j) : for F8PPAC
+c	j : PPACID 
+c		1 = F8PPAC-1A
+c               2 = F8PPAC-1B
+c               3 = F8PPAC-2A
+c               4 = F8PPAC-2B
+c               5 = F8PPAC-3
+c  
+c       i : data type
+c		1 = x (mm)
+c               2 = y (mm)
+c               3 = zx (mm) from modified focus
+c               4 = zy (mm) from modified focus
+c               5 = t (ns)
+c
+c
+c tofdata(i)
+c       i : 1 - notof. up to 20. 
+c       
+c TOF configurations are determined in tof.prm.
+c           
+c aoqdata(i,j)           
+c       j : 1 - noaoq. up to 20.
+c     
+c       i : 1 = Brho
+c           2 = Beta
+c           3 = Z
+c           4 = A/Q
+c
+c Configurations are determined in config.prm.
+c

@@ -1,0 +1,6 @@
+      real c46,c76,c79,c7s0,c9s0,c7s2,c9s2,cs0s2
+      real c7s0pp,c9s0pp
+      real c6s2
+      real cs2f
+      common/OPTICS/c46,c76,c79,c7s0,c9s0,c7s2,cs2f,
+     &     c9s2,cs0s2,c6s2,c7s0pp,c9s0pp

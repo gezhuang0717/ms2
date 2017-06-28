@@ -1,0 +1,191 @@
+;; .emacs                                                                               
+
+;;; uncomment this line to disable loading of "default.el" at startup
+;; (setq inhibit-default-init t)
+
+;; enable visual feedback on selections
+;(setq transient-mark-mode t)
+
+;; default to better frame titles
+(setq frame-title-format
+      (concat  "%b - emacs@" (system-name)))
+
+;; default to unified diffs
+(setq diff-switches "-u")
+
+;; always end a file with a newline
+;(setq require-final-newline 'query)
+
+;;; uncomment for CJK utf-8 support for non-Asian users
+;; (require 'un-define)
+
+;; ここまでオリジナルの設定
+
+;;タイトルバーにファイル名表示
+(setq frame-title-format"%b")
+
+;;起動時にメニュー非表示
+(setq inhibit-startup-message t)
+
+;;ツールバーを表示しない
+(tool-bar-mode 0)
+
+;; メニューバーを非表示
+(menu-bar-mode 0)
+
+;;自動で色をつける                                                            
+(global-font-lock-mode t)
+
+;;モードラインの色指定
+(set-face-background'modeline"DeepSkyBlue2")
+
+;;選択範囲に色をつける
+(setq transient-mark-mode t)
+
+;;ホイールできるようにする　
+(mouse-wheel-mode)
+
+;;; スクロールマウスの設定
+
+ (global-set-key   [mouse-4] '(lambda () (interactive) (scroll-down 5)))
+ (global-set-key   [mouse-5] '(lambda () (interactive) (scroll-up   5)))
+;                 Shift
+ (global-set-key [S-mouse-4] '(lambda () (interactive) (scroll-down 1)))
+ (global-set-key [S-mouse-5] '(lambda () (interactive) (scroll-up   1)))
+;                 Control
+ (global-set-key [C-mouse-5] '(lambda () (interactive) (scroll-up   (/ (window-height) 2))))
+ (global-set-key [C-mouse-4] '(lambda () (interactive) (scroll-down (/ (window-height) 2))))
+
+; Control を半頁でなく一頁づつとする時
+;(global-set-key [C-mouse-4] '(lambda () (interactive) (scroll-down)))
+;(global-set-key [C-mouse-5] '(lambda () (interactive) (scroll-up  )))
+
+
+;;Change key M-x goto-linne
+(global-set-key "\C-x\C-g" 'goto-line)
+
+
+;;バックスペースを使えるようにする
+;(if (eq window-system 'x)
+
+;(progn
+
+;  (define-key function-key-map [backspace] [8])
+
+;  (put 'backspace 'ascii-character 8)
+
+;))
+
+;(global-set-key "\C-h" 'backward-delete-char)
+
+;(global-set-key "\177" 'delete-char)
+
+
+;;日本語を使えるようにする
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+;; '(cua-mode t nil (cua-base))
+ '(current-language-environment "Japanese")
+ '(remote-shell-program "rsh"))
+
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
+;;透明化
+;(set-frame-parameter nil 'alpha 80)
+
+
+(if (boundp 'window-system)
+    (setq initial-frame-alist
+          (append (list
+                   '(width . 78) ;; ウィンドウ幅
+                   '(height . 50) ;; ウィンドウの高さ
+                   '(top . 60) ;;表示位置
+                   '(center . 0) ;;表示位置
+                   )
+                  initial-frame-alist)))
+(setq default-frame-alist initial-frame-alist)
+
+
+
+
+
+;;カーソルのある行のハイライト表示
+(defface hlline-face
+  '((((class color)
+      (background dark))
+     (:background "dark slate gray"))
+    (((class color)
+      (background light))
+;;     (:background "LightCoral"))
+     (:background "None"))
+    (t
+     ()))
+  "*Face used by hl-line.")
+(setq hl-line-face 'hlline-face)
+;; (setq hl-line-face 'underline) ; 下線
+(global-hl-line-mode)
+
+;; 対応する括弧を光らせる。
+(show-paren-mode 1)
+
+;;; スクロールを一行ずつにする
+(setq scroll-step 1)
+
+;;; スクロールバーを右側に表示する
+(set-scroll-bar-mode 'right)
+
+
+
+;;;yatex;;;
+
+;;(setq tex-command "platex2pdf") 
+
+; dviからpdfを作成する%sはファイル名
+;;(setq dviprint-command-format "dvipdfmx %s")
+
+
+
+;;(setq dvi2-command "xdvi -paper us")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; KUMAC mode -- get it from http://uther1.phy.ornl.gov/~morrison/
+;;
+(autoload 'kumac-mode "/home/exp/Analys/users/ss/emacs.d/kumac-mode.el" "Mode for KUMAC files." t)
+(setq auto-mode-alist (cons '("\\.kumac$" . kumac-mode) auto-mode-alist))
+(add-hook 'kumac-mode-hook (lambda () (abbrev-mode 1)))
+(add-hook 'kumac-mode-hook (lambda () (font-lock-mode 1)))
+(setq font-lock-maximum-decoration t)
+(global-font-lock-mode t)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; ANALYS mode 
+;;
+(autoload 'ana-mode "/home/exp/Analys/users/ss/emacs.d/ana-mode.el" "Mode for editing ANA files." t)
+(setq auto-mode-alist (cons '("\\.ana$" . ana-mode) auto-mode-alist))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; ANALYS PRM mode 
+;;
+(autoload 'prm-mode "/home/exp/Analys/users/ss/emacs.d/prm-mode.el" "Mode for editing ANA files." t)
+(setq auto-mode-alist (cons '("\\.prm$" . prm-mode) auto-mode-alist))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; INC files --> FORTRAN Mode 
+;;
+(setq auto-mode-alist (cons '("\\.inc$" . fortran-mode) auto-mode-alist))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; fh files --> FORTRAN Mode 
+;;
+(setq auto-mode-alist (cons '("\\.fh$" . fortran-mode) auto-mode-alist))

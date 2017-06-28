@@ -1,0 +1,10 @@
+macro hc [id]
+   
+   opt liny
+   opt logz
+ min [id] 0.8
+*max [id] 1e+7
+*hi/plot [id] zcol
+   ht [id] zcol
+   
+return

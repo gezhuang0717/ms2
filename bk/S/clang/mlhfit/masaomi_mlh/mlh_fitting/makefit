@@ -1,0 +1,1 @@
+gfortran -o main.exe main2.f cfdqr22.f exp2.f dexp2.f d2exp2.f flval22.f coef2.f mtxinv2.f qrtrn2.f 

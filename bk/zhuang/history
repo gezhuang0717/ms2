@@ -1,0 +1,45 @@
+*** Begin of history file: Thu Jun 11 18:27:20 2015
+book ana/tmp1.ana
+ana/loop ridf/CDPPAC0040.ridf
+i
+ht
+hnt
+hnt
+hnt
+hnt
+hnt
+hnt
+hnt
+hnt
+hnt
+i
+hnt
+hnt
+clear
+book ana/tmp2.ana
+ana/loop ridf/CDPPAC0041.ridf
+i
+ht
+hnt
+hnt
+hnt
+i
+i
+ht 105
+hnt
+i
+hnt
+hcol 107
+htp colz
+opt stat
+ht
+ht 107 colz
+opt logz
+ht 107 colz
+i
+ht 105
+xf
+help
+xfitg
+exit
+*** End   of history file: Thu Jun 11 18:41:38 2015

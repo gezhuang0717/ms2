@@ -1,0 +1,119 @@
+c ======================================================
+c       Parameter File for PPAC's
+c ======================================================
+c ch2ns
+'src/prm/ppac/ppactcal.prm'
+c
+c q_ped
+'src/prm/ppac/ppacqped.prm'
+c
+c iflag_outside_offset (line calib)
+c
+1
+c 
+c Xoutoffset : line calib. offset for X(ns)   X-offset
+3.31,9.01
+-4.72,-11.4,9.79,6.96
+-17.83, 3.12,
+7.64
+13.66,14.38,-14.86,10.94
+2.22
+0.06647 0.0
+-0.2529 0.0
+-0.11066 0.0
+0.0 0.0
+0.0 0.0
+c
+c Youtoffset : line calib. offset for Y(ns)   Y-offset
+2.78,3.85
+-3.54, 16.33, 10.17, 8.05
+22.08, -13.73
+17.62
+22.86,0.79,13.09,-15.63
+8.35
+0.2616 0.0
+-0.3183 0.0
+-0.22221 0.0
+0.0 0.0
+0.0 0.0
+c
+c iflag_inside_offset
+c
+1
+c
+c kumagai parameter
+c Xinoffset : line offset for X (Kumagai Parameter)
+'src/prm/ppac/kpara_xoff.prm'
+c
+c Yinoffset : line offset for Y (Kumagai Parameter)
+'src/prm/ppac/kpara_yoff.prm'
+c
+c ns2mm : X Y (Kumagai Parameter)
+c
+'src/prm/ppac/kpara_factor.prm'
+c
+c Z position of each PPAC
+c
+'src/prm/ppac/ppac_zpos.prm'
+c
+c iflag_geom_offset
+c
+1
+c
+c geomoffset (x,y) (mm) :  X(Y)-offset
+0.0,0.0
+0.871,0.0
+1.05,0.0
+0.57,0.0
+1.98,0.0
+1.76,0.0
+0.0,0.0
+-0.59,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+-0.15,0.0
+-0.15,0.0
+-0.63,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+0.0,0.0
+c
+c TXsum gate 
+c for R3 2015.Jun, TXsum/TYsum gate for FH9 and FHX is not effective
+c  in calc_ppac(), an additional flag of the use of overflow detection
+c   is implmented. For FH9 and HFX, this overflow detection is disabled
+c
+c flag
+0
+c definition
+'src/prm/ppac/txsum.prm'
+c
+c TYsum gate
+c
+c flag
+0
+c
+'src/prm/ppac/tysum.prm'
+c
+c ZPOS (mm) max = 8
+c ifocus, zposition from focus ,+: downstream, -: upstream
+c F11 273: IC entrance, 1066: Pla 1600: Stopper
+c ZDS com. focal plane F8: 500.
+c 48Ca exp focal plane F8: 456.
+c
+7,1000.
+8,456.
+11,273.
+11,1066.
+11,1600.
+12,456.
+8,-240
+0,0

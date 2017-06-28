@@ -1,0 +1,38 @@
+* output text from 2-dimensional plot
+ macro 1dvec id=101 output='1dvec.dat'
+   
+* read HID
+   read id input HID
+   ht [id]
+* read HINFO
+   xmin = $hinfo([id],'xmin')
+   xmax = $hinfo([id],'xmax')
+   xbin = $hinfo([id],'xbins') 
+*   ymin = $hinfo([id],'ymin')
+*   ymax = $hinfo([id],'ymax')
+*   ybin = $hinfo([id],'ybins') 
+   
+   xw = ([xmax]-[xmin])/[xbin]
+*   yw = ([ymax]-[ymin])/[ybin]
+   
+* create/input/write vector
+   v/cre xx([xbin]) r
+* v/cre yy([xbin],[ybin]) r
+   v/cre v([xbin]) r
+   get/con [id] v
+   
+*   mess now input variables into vector...
+   do i=1,[xbin]
+     xval = ([i]-1)*[xw] + [xmin]
+     v/input xx([i]) [xval]
+   enddo
+   
+* mess finish input   
+   
+ v/w  xx,v [output] 'F14.8,2X,F8'
+* v/w  xx,v [output] 'F14.8,2X,F8.1'
+
+   mess output : [output]
+   
+ return
+ 

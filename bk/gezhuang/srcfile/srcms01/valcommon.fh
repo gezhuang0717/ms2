@@ -1,0 +1,2 @@
+      integer nfocus
+      parameter (nfocus=7)

@@ -1,0 +1,96 @@
+* output text from 2-dimensional plot
+ macro cor_coef [id] [output] 
+* hc [id]
+* read HINFO
+   xmin = $hinfo([id],'xmin')
+   xmax = $hinfo([id],'xmax')
+   xbin = $hinfo([id],'xbins') 
+   ymin = $hinfo([id],'ymin')
+   ymax = $hinfo([id],'ymax')
+   ybin = $hinfo([id],'ybins') 
+   title = $htitle([id])
+   
+   xw = ([xmax]-[xmin])/[xbin]
+   yw = ([ymax]-[ymin])/[ybin]
+   
+* create/input/write vector
+*   v/cre xx([xbin],[ybin]) r
+*   v/cre yy([xbin],[ybin]) r
+   v/cre v([xbin],[ybin]) r
+   get/con [id] v
+   
+*   fmess [id] [output]
+* fmess [title] [output]
+   x_ave = 0.
+   y_ave = 0.
+   total = 0
+   do i=1,[xbin]
+     xval = ([i]-1)*[xw] + [xmin]
+     do j=1,[ybin]
+       yval = ([j]-1)*[yw] + [ymin]
+*       v/input xx([i],[j]) [xval]
+*       v/input yy([i],[j]) [yval]
+       c = v([i],[j])
+* fmess [xval],[yval],[c] [output]
+       x_ave = [x_ave] + [c]*[xval]
+       y_ave = [y_ave] + [c]*[yval]
+       total = [total] + [c]
+     enddo
+   enddo
+   if ([total]<4) then
+     mess entries<4
+     fmess [id],,[title] [output]
+     exitm
+   endif
+   x_ave = [x_ave]/[total]
+   y_ave = [y_ave]/[total]
+   xy_sum = 0.
+   x_sum = 0.
+   y_sum = 0.
+   do i=1,[xbin]
+     xval = ([i]-1)*[xw] + [xmin]
+     do j=1,[ybin]
+       yval = ([j]-1)*[yw] + [ymin]
+       c = v([i],[j])
+       x_diff = [xval]-[x_ave]
+       y_diff = [yval]-[y_ave]
+       xy_sum = [xy_sum] + [c]*[x_diff]*[y_diff]
+       x_sum = [x_sum] + [c]*[x_diff]*[x_diff]
+       y_sum = [y_sum] + [c]*[y_diff]*[y_diff]
+*       xy_sum = [xy_sum] + [c]*([xval]-[x_ave])*([yval]-[y_ave])
+*       x_sum = [x_sum] + [c]*(([xval]-[x_ave])**2)
+*       y_sum = [y_sum] + [c]*(([yval]-[y_ave])**2)
+     enddo
+   enddo
+   if ([xy_sum]=0.) then
+     mess x or y is no count
+     fmess [id],,[title] [output]
+     exitm
+   endif
+   
+   x_sum = $sigma(sqrt([x_sum]))
+   y_sum = $sigma(sqrt([y_sum]))
+   cor_coef = [xy_sum]/([x_sum]*[y_sum])
+   sigma = $sigma(sqrt(1.-[cor_coef]*[cor_coef])/sqrt([total]-2.))
+   r = [cor_coef]
+   z = $sigma(0.5*log((1.+[r])/(1.-[r])))
+   rl = $sigma(tanh([z]-1.96/sqrt([total]-3)))
+   ru = $sigma(tanh([z]+1.96/sqrt([total]-3)))
+   t0 = [cor_coef]/[sigma]
+   p_coef = 0.5*([rl]+[ru])
+   sig_p_coef = [ru]-[p_coef]
+* if([total]>1) then
+* mess [cor_coef] ([sigma])
+* fmess [id],[cor_coef],[sigma],[title] [output]
+     fmess [id],[cor_coef],[total],[rl],[ru],[t0],[title] [output]
+* fmess [id],[cor_coef],[sigma],[p_coef],[sig_p_coef],[title] [output]
+*   else
+*     mess no entries
+*     fmess [id],,[title] [output]
+*   endif
+       
+* v/w  xx,yy,v [output] 'F14.8,2X,F14.8,2X,F8.1'
+*   mess output : [output]
+   
+ return
+ 

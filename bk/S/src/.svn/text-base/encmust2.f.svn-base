@@ -1,0 +1,261 @@
+c Analyzer 20+MUST2ID : Encmust2
+      SUBROUTINE Encmust2(val,nx,ny,naok,
+     &     rawdata,nhitdata,hitdet,nhitdet,ndet,ndata,catid)
+c---------------------------------------------------------------------------
+c ANALYZER 20+MUST2ID : MUST2
+c---------------------------------------------------------------------------
+c
+cID = 1001-1004 : Multiplicity for STRX, STRY, SiLi, and CsI
+c
+cW# : 1      2       
+c     ID     M 
+c
+cID = (2*(j-1))*100 + multi : MUST2-i, j (Detector Type)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+c MUST2-*
+c
+cID = multi : STRX (1 - 128)
+c
+cW# : 1      2            3      4      5      6
+c     ID     ID in MUST2  E      T      Ecal   Tcal
+c
+cID = 200 + multi : STRY (201 - 328)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+cID = 400 + multi : SiLi (401 - 416)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+cID = 600 + multi : CsI  (601 - 616)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+c
+c---------------------------------------------------------------------------
+c
+
+      IMPLICIT NONE
+      INCLUDE 'analyslogic.fh'
+      INCLUDE 'commonprm.fh'
+
+      INTEGER nx, ny, ndet, ndata, naok
+      INTEGER rawdata(ndata,ndet)
+      INTEGER nhitdata(ndet)
+      INTEGER hitdet(ndet)
+      INTEGER nhitdet,catid
+      REAL    val(nx,ny)
+
+      INCLUDE 'numbers.fh'
+      INCLUDE 'must2conf.fh'
+      INCLUDE 'must2pos.fh'
+
+c local
+      INTEGER i,j,k
+      INTEGER lop,mid,dettype,id,multi
+
+      INTEGER strxid(10,nmust2), stryid(10,nmust2)
+      REAL pos(10,10,3)
+
+      INTEGER MultEth(4),resID
+
+      IF (initencflag(catid)) THEN
+         CALL Loadmust2conf
+         CALL Loadmust2prm
+         initencflag(catid) = .FALSE.
+      ENDIF
+
+      naok = 0
+
+      mid = catid - 20
+
+c initialize for Multiplicities in each MUST2
+      multinm2(1,mid) = 0         ! for STRX
+      multinm2(2,mid) = 0         ! for STRY
+      multinm2(3,mid) = 0         ! for SILI 
+      multinm2(4,mid) = 0         ! for CSI
+
+      do i=1,10
+         do j=1,10
+            do k=1,3
+               pos(i,j,k) = -1000.
+            enddo
+         enddo
+      enddo
+
+      Do i =1,4
+         MultEth(i) = 0
+      Enddo
+
+      resID = -1000
+c store event data to m2data array.      
+
+      DO i = 1, nhitdet, 1
+         lop      = hitdet(i)      ! label of parameter
+         dettype  = m2dtype(1,lop) ! Detector Type : 1=strx,2=stry,3=sili,4=csi
+         id       = m2dtype(2,lop) ! ID for each detector in MUST2
+
+         multinm2(dettype,mid) = multinm2(dettype,mid) + 1
+
+         m2data(multinm2(dettype,mid),1,dettype,mid) = id
+         m2data(multinm2(dettype,mid),2,dettype,mid) = rawdata(1,lop)
+         m2data(multinm2(dettype,mid),3,dettype,mid) = rawdata(2,lop)
+
+c            WRITE(*,*)i,mid,lop,dettype,id,multinm2(dettype,mid),
+c     &           m2data(multinm2(dettype,mid),1,dettype,mid),
+c     &           m2data(multinm2(dettype,mid),2,dettype,mid),
+c     &           m2data(multinm2(dettype,mid),3,dettype,mid)
+            
+      ENDDO
+
+c      write(*,*) "=========== IN ENC ======================"      
+c      do i=1,4
+c         do j=1,8
+c            if(multinm2(i,j) .gt. 0) then
+c               write(*,*)i,j,multinm2(i,j)
+c            endif
+c         enddo
+c      enddo
+
+c store data to val.
+      
+      DO j = 1, 4, 1            ! Detector Type
+         
+         multi = multinm2(j,mid)
+         
+         IF (multi.EQ.0) CYCLE
+         
+         DO i = 1, multi, 1
+
+            id = (2*(j-1))*100+i
+            naok = naok + 1
+            val(1,naok) = id
+            val(2,naok) = m2data(i,1,j,mid) ! ID in MUST2
+            val(3,naok) = m2data(i,2,j,mid) ! E
+            val(4,naok) = m2data(i,3,j,mid) ! T
+            val(5,naok) = m2prm(2,i,2,j,mid) * m2data(i,2,j,mid)
+     &           + m2prm(1,i,2,j,mid)
+            val(6,naok) = m2prm(1,i,3,j,mid) +
+     &           m2prm(2,i,3,j,mid) * m2data(i,3,j,mid) + 
+     &           m2prm(3,i,3,j,mid) * m2data(i,3,j,mid)**2
+c            write(*,*) val(5,naok), val(6,naok)
+            
+cc          high multiplicity event is not used 
+cc          multi is limited less than 10            
+            IF(multi .lt.10)then
+               IF(j.eq.1 .and. val(5,naok) .gt. 300.) then
+                  strxid(i,mid) = m2data(i,1,j,mid) 
+               Elseif(j.eq.2 .and. val(5,naok) .gt. 300.) then
+                  stryid(i,mid) = m2data(i,1,j,mid)
+               Endif
+            ENDIF
+
+            IF(val(5,naok) .gt. 300) then
+               MultEth(j) = MultEth(j) + 1
+            Endif
+
+            IF(i .ge. 2) then
+               resID = m2data(i,1,j,mid) - m2data(1,1,j,mid)
+            ENDIF
+
+            val(7,naok) = resID
+
+c            IF(i.ge. 2 .and. resID .ge. -2 .and. resID .le. 2) then
+c               
+c            ENDIF
+
+         ENDDO
+
+      ENDDO
+
+      DO i = 1, 4, 1
+         id = i + 1000
+         naok = naok + 1
+         val(1,naok) = id
+         val(2,naok) = multinm2(i,mid)
+         val(3,naok) = MultEth(i)
+      ENDDO
+
+
+
+      IF(multinm2(1,mid).lt.10 .and. multinm2(2,mid) .lt. 10) then
+         DO i=1,multinm2(1,mid),1
+            Do j=1,multinm2(2,mid),1
+               CALL M2POSITION(mid,strxid(i,mid),stryid(j,mid),
+     &              pos(i,j,1),pos(i,j,2),pos(i,j,3))
+c               write(*,*)i,j,mid,pos(i,j,1),pos(i,j,2),pos(i,j,3)
+            Enddo
+         Enddo
+         
+         Do i=1,multinm2(1,mid),1
+            naok = naok + 1
+            val(1,naok) = 700 + i
+            Do j =1,multinm2(2,mid)
+               val(10+j,naok) = pos(i,j,1)
+               val(20+j,naok) = pos(i,j,2)
+               val(30+j,naok) = pos(i,j,3)
+            enddo
+         enddo
+            
+
+      Endif
+      
+      RETURN
+
+      END
+
+c ==================================================================
+c FUNCTION FOR POSITION 
+c ==================================================================
+c Y.Togano 2010/05/20
+c need both X and Y information
+      SUBROUTINE M2POSITION(m2id,strxid,stryid,x,y,z)
+      IMPLICITNONE
+
+      INCLUDE 'must2pos.fh'
+
+      integer m2id,strxid,stryid
+      Real x,y,z
+      
+c local
+      REAL xa,xb,dxa,dxb
+      REAL ya,yb,dya,dyb
+      REAL za,zb,dza,dzb
+
+c X
+      xa = (EdgePos(m2id,3,1) - EdgePos(m2id,1,1))/NStrip
+      xb = EdgePos(m2id,1,1) - xa
+      dxa = (EdgePos(m2id,2,1) - EdgePos(m2id,1,1))/NStrip
+      dxb = -dxa
+
+      x = xa*strxid + xb +(dxa*stryid + dxb)
+
+c Y
+      ya = (EdgePos(m2id,2,2) - EdgePos(m2id,1,2))/NStrip
+      yb = EdgePos(m2id,1,2) - ya
+      dya = (EdgePos(m2id,3,2) - EdgePos(m2id,1,2))/NStrip
+      dyb = -dya
+
+      y = ya*stryid + yb +(dya*strxid + dyb)
+
+c Z
+      za = (EdgePos(m2id,3,3) - EdgePos(m2id,1,3))/NStrip
+      zb = EdgePos(m2id,1,3) - za
+      dza = (EdgePos(m2id,2,3) - EdgePos(m2id,1,3))/NStrip
+      dzb = -dza
+
+      z = za*strxid + zb +(dza*stryid + dzb)
+
+c      write(*,*) "x",m2id,xa,xb,dxa,dxb
+c      write(*,*) "y",m2id,ya,yb,dya,dyb
+c      write(*,*) "z",m2id,za,zb,dza,dzb
+      
+      return
+      end
+

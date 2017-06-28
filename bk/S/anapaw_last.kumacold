@@ -1,0 +1,20 @@
+*** Begin of history file: Tue Jan  5 19:33:48 2016
+book ana/pi-ao.ana
+a/l ridf/MS02.run0128mod1.ridf
+a/l ridf/MS02/run0128mod1.ridf
+i
+opt sta
+ht 149
+she
+clear
+a/l ridf/MS02.run0128mod1.ridf
+clear
+book ana/pi-ao.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 149
+locate
+hist/fit 149 g
+she
+exit
+*** End   of history file: Tue Jan  5 19:39:40 2016

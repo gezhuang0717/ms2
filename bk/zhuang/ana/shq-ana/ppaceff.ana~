@@ -1,0 +1,47 @@
+c
+c Analyzer
+c 1=encppac
+analys
+1 ! ppac
+7 ! coin
+21 ! spla
+10 ! dia
+22 ! dc31a
+23 ! dc32a
+24 ! f3 tracking
+36 ! dcx1
+38 ! dcx2
+41 ! Si
+45 ! dcs21
+46 ! dcs22
+48 ! s2 traking 
+15 ! traj
+18 ! optics
+47 ! phys
+gate
+c S0PPAC-X Detected
+101, 1,36,36,31, -200,200
+c S0PPAC-Y Detected
+102, 1,36,36,32, -200,200
+hst2
+0,	47,10,10,6,	47,10,10,8,	300,2.0,3.2,	300,0,30,	'AoQ vs Z Wide;AoQ(F3-S2);Z(S2)'
+c
+0, 1,36,36,31, 1,36,36,32, 200,-200,200, 200,-100,100,     'S0PPAC;X(mm);Y(mm)'
+
+hst1
+0,	47,10,10,8,	300,0,30,	'Z Spectrum'
+c
+hst2
+0,1,1,1,1,1,1,1,1,1,0,1,1,0,1,'******* PPAC Tsum *******'
+hst1
+0,	1,36,36,35,	500,0,250, 'S0PPAC TXsum(ns)'
+0,	1,36,36,36,	500,0,250, 'S0PPAC TYsum(ns)'
+c
+hst2
+0,1,1,1,1,1,1,1,1,1,0,1,1,0,1,'******* PPAC Eff *******'
+hst1
+0,	47,10,10,8,	30,0.5,30.5,	'Z(S2Si)'
+101,	47,10,10,8,	30,0.5,30.5,	'S0PPAC X Efficiency'
+102,	47,10,10,8,	30,0.5,30.5,	'S0PPAC Y Efficiency'
+
+end

@@ -1,0 +1,4 @@
+ v/cre v(300,300)
+ hc [1]
+ get/con [1] v
+ v/w v ./dpvec.dat

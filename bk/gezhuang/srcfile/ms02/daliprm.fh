@@ -1,0 +1,19 @@
+c
+c daliprm.fh 2010/08/25 S.TAKEUCHI
+c
+      INTEGER nch_dali
+      PARAMETER (nch_dali = 140)
+
+      INTEGER id2layer(nch_dali)
+      
+      REAL ped(nch_dali)
+      REAL gain(nch_dali)
+      REAL ch2ns(nch_dali)
+      REAL toff(nch_dali)
+      REAL theta(nch_dali)
+
+      REAL beta, gamma
+      REAL truemin,truemax
+
+      COMMON/DALIPRM/ ped, gain, ch2ns, toff, theta,
+     &                beta, gamma, truemin, truemax, id2layer

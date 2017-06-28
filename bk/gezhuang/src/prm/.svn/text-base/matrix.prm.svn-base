@@ -1,0 +1,28 @@
+c
+c Brho file
+c
+'src/prm/brho.prm'
+c
+c # of dispersive focus
+c
+2
+c
+c Focus, Dispersion (mm/%)
+c
+5,  31.6
+9, -24.8
+c
+c # of matrices to be calculated
+c
+4, 
+c
+c Matrix ID   (see src/conf/matrix.conf)
+c
+1,2,3,4
+c
+c iflag_highorder
+c 	1 : Reconstruction using high order matrix
+c       0 : Reconstruction NOT using high order matrix
+0
+c
+c 

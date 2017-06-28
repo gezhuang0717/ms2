@@ -1,0 +1,27 @@
+* *****  Definition of parameters and Initial values for fitting parameters
+ npara = 3
+ vec/crea  param(3)
+ vec/crea  step(3)
+ vec/crea  pmin(3)
+ vec/crea  pmax(3)
+ vec/crea  errprm(3)
+* 
+* Initial values
+* =========
+ vec/inp   param(1:[npara])   2.0e3  2.0e3  3.0e3
+* =========
+* 
+* Step size for parameters 
+* =========
+ vec/inp   step(1:[npara])    1.e0  1.e0  1.e0    
+* =========
+* 
+* Boundary for parameters minimum and max
+ vec/inp   pmin(1:[npara])   1.e2    1.0e2     0.e0     
+ vec/inp   pmax(1:[npara])   5.e3    5.0e5     1.e5     
+* 
+* ***** Call MINUIT routine
+ hi/fit [1](3000.:5800.) ./kumac/func4.f BEV [npara] param step pmin pmax errprm 
+* hi/fit [1](2900.:5800.) ./kumac/func4.f BEVL [npara] param step pmin pmax errprm 
+* 
+* *****

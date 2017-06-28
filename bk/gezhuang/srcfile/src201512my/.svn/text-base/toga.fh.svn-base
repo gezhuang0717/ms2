@@ -1,0 +1,3 @@
+	integer toga_m2m(4,8)
+
+	COMMON/TOGA/toga_m2m

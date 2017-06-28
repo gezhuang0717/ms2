@@ -1,0 +1,9 @@
+      real pol1
+      real pol2
+      real pol3
+      logical gate1d
+
+      external pol1
+      external pol2
+      external pol3
+      external gate1d

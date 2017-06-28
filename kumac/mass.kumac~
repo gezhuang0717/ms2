@@ -1,0 +1,6 @@
+book ana/moq.ana
+*
+ana/loop ./ridf/run0128mod1.ridf b ; mess RUN 0128 end.
+
+*
+hstore mass-128.hbk

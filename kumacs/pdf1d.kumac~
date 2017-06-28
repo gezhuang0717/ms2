@@ -1,0 +1,19 @@
+ macro pdf [id]
+   fname = [id]
+   read fname file name
+   file = ps/[fname].ps
+   tmp = pdf/tmp.pdf
+   file2 = pdf/[fname].pdf
+*   file = ps/[id].ps
+*   tmp = pdf/tmp.pdf
+*   file2 = pdf/[id].pdf
+   
+   pson [file]
+   ht [id]
+   psoff
+   mess output : [file]
+   shell ps2pdf [file] [tmp]
+   shell pdfcrop [tmp] [file2]
+ return
+ 
+   

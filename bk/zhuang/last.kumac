@@ -1,0 +1,77 @@
+*** Begin of history file: Wed May 18 14:25:21 2016
+usage n/pl
+alias
+alias/li
+ MESSAGE  SIGMA(SQRT(2*pi))
+ MESSAGE  *SIGMA(SQRT(2*pi))
+ MESSAGE  *SIGMA(SQRT(2)*pi)
+ MESSAGE  $SIGMA(SQRT(2)*pi)
+vec/cr ww r 10
+vec/cr ss r
+10 20 30 40 50
+vec/cr ss r 10 20 30 40 50
+vec/cr sss r 10 20 30 40 50
+VEC CR WWW R
+VEC/CR WWW R
+VEC/CR WWW R 10
+v/del *
+VEC/CR WWW R 10
+vec/cr sss(5) r 10 20 30 40 50
+v/p www
+v/pr www
+v/pr sss
+v/pl sss
+v/pl w
+ GRAPH      SIGMA SIN XVEC    SIGMA COS XVEC
+ GRAPH  100    $SIGMA(SIN(XVEC))   $SIGMA(COS(XVEC))
+ GRAPH  100    $SIGMA(SIN(XVEC))   $SIGMA(COS(XVEC))
+usage n/pl
+ MESSAGE  *SIGMA(SQRT(2*pi))
+usage n/pl
+v/pr www
+v/pr www
+v/draw sss
+v/draw www
+v/draw sss
+v/draw sss%www
+v/plot sss
+v/cr qqq(5)
+v/co sss qqq
+v/plot sss%qqq
+set
+set mtyp 30
+v/plot sss%qqq
+pir 5 5 10 sss
+pie 5 5 10 6 sss
+pie 5 5 10 5 sss
+pie 5 5 10 5 sss
+pie 5 5 10 5 sss
+graph 5 sss qqq
+hist 5 sss qqq
+v/fit sss qqq p1
+v/fit sss qqq ! e
+v/fit sss qqq ! g
+v/fit sss qqq ! g+e
+v/fit sss qqq ! g+p
+v/fit sss qqq ! g
+sigma
+VECTOR/CREATE X(100)
+v/l
+usuage v/inp
+usage v/inp
+usage v/read
+usage VECTOR/PRINT
+ VECTOR/PRINT sss
+ VECTOR/PRINT www
+SIGMA X=ARRAY(100,1#100)
+ VECTOR/PRINT x
+app sigma
+exit
+pson
+appl sigma
+!print
+exit
+lls
+sh
+l
+*** End   of history file: Wed May 18 20:43:32 2016

@@ -1,0 +1,9 @@
+ macro f3
+   zone 1 1
+   zone 2 2
+   ht 101 
+   ht 102 
+   ht 103 
+   ht 104 
+* return
+

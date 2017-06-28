@@ -1,0 +1,23 @@
+*** Begin of history file: Fri Apr  8 15:31:09 2016
+h/file 1 238uto81ga.hbk
+hist/file 1 238uto81ga.hbk
+hist/print 1
+n/print 1
+n/pl 1.tof(1)
+n/pl 1.tof(9)
+n/pl 1.tof(9) n>=9
+n/pl 1.tof(8) n>=8
+n/pl 1.tof(7) n>=7
+n/pl 1.tof(4) n>=4
+n/pl 1.tof(4)%-x(2) n>=4
+avy
+2dh 200 '' 300 -3 3 300 0.6 0.8
+n/proj 200 1.tof(4)%-x(2) n>=4
+h/pl 200
+hist/pl 200
+avy
+avy 200
+hist/pl 200
+figa
+exit
+*** End   of history file: Fri Apr  8 15:34:14 2016

@@ -1,0 +1,15 @@
+c     @file: args.fh
+c     @create: Oct 02, 2010, 04:29
+c     @created by Shinsuke
+c     @last-update: Oct 02, 2010, 04:29
+c     @discription
+c     include file for analyzer 
+
+      integer nx, ny, ndet, ndata, naok
+      integer rawdata(ndata,ndet)
+      integer tcaldata(ndata,ndet)      
+      integer nhitdata(ndet)
+      integer hitdet(ndet)
+      integer nhitdet,ihit
+      integer analyzer
+      real val(nx,ny)

@@ -1,0 +1,131 @@
+c Analyzer 20+MUST2ID : Encmust2
+      SUBROUTINE Encmust2(val,nx,ny,naok,
+     &     rawdata,nhitdata,hitdet,nhitdet,ndet,ndata)
+c---------------------------------------------------------------------------
+c ANALYZER 20+MUST2ID : MUST2
+c---------------------------------------------------------------------------
+c
+cID = i*1000 + 1
+c
+cW# : 1      2       3       4       5
+c     ID     M(STRX) M(STRY) M(SILI) M(CSI)
+c
+cID = i*1000 + (2j-1)*100 + multi : MUST2-i, j (Detector Type)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+c MUST2-1
+c
+cID = 1000 + 100 + multi : STRX (1101 - 1228)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+cID = 1000 + 300 + multi : STRY (1301 - 1428)
+c
+cW# : 1      2            3      4
+c     ID     ID in MUST2  E      T
+c
+c ID = 1501 - : SILI
+c ID = 1701 - : CSI
+c
+c MUST2-2
+c ID = 2101 - : STRX, ID = 2301 - : STRY, ID = 2501 - : SILI, ID = 2701 - : CSI
+c
+c MUST2-3
+c ID = 3101 - : STRX, ID = 3301 - : STRY, ID = 3501 - : SILI, ID = 3701 - : CSI
+c
+c ...
+c
+c---------------------------------------------------------------------------
+c
+
+      IMPLICIT NONE
+      INCLUDE 'analyslogic.fh'
+      INCLUDE 'commonprm.fh'
+
+      INTEGER nx, ny, ndet, ndata, naok
+      INTEGER rawdata(ndata,ndet)
+      INTEGER nhitdata(ndet)
+      INTEGER hitdet(ndet)
+      INTEGER nhitdet,catid
+      REAL    val(nx,ny)
+
+      INCLUDE 'numbers.fh'
+      INCLUDE 'must2conf.fh'
+
+c local
+      INTEGER i,j
+      INTEGER lop,mid,dettype,id,multi
+
+      IF (initencflag(catid)) THEN
+         CALL Loadmust2conf
+         initencflag(catid) = .FALSE.
+      ENDIF
+
+      naok = 0
+
+c initialize for Multiplicities in each MUST2
+      DO i = 1, nmust2
+         multinm2(1,i) = 0        ! for STRX
+         multinm2(2,i) = 0        ! for STRY
+         multinm2(3,i) = 0        ! for SILI 
+         multinm2(4,i) = 0        ! for CSI
+      ENDDO
+
+
+c store event data to m2data array.      
+      DO i = 1, nhitdet, 1
+         lop      = hitdet(i)      ! label of parameter
+         mid      = m2dtype(1,lop) ! MUST2-ID
+         dettype  = m2dtype(2,lop) ! Detector Type : 1=strx,2=stry,3=sili,4=csi
+         id       = m2dtype(3,lop) ! ID in MUST2
+         
+         multinm2(dettype,mid) = multinm2(dettype,mid) + 1
+
+         m2data(multinm2(dettype,mid),1,dettype,mid) = id
+         m2data(multinm2(dettype,mid),2,dettype,mid) = rawdata(1,lop)
+         m2data(multinm2(dettype,mid),3,dettype,mid) = rawdata(2,lop)
+
+      ENDDO
+
+c store data to val.
+      DO i = 1, nmust2, 1       ! MUST2 ID
+
+         id = i*1000 + 1
+         naok = naok + 1
+         val(1,naok) = id
+         val(2,naok) = multinm2(1,i)
+         val(3,naok) = multinm2(2,i)
+         val(4,naok) = multinm2(3,i)
+         val(5,naok) = multinm2(4,i)
+
+         DO j = 1, 4, 1         ! Detector Type
+
+            multi = multinm2(j,i)
+
+            IF (multi.EQ.0) CYCLE
+
+            id = i*1000+(2*j-1)*100+multi
+            naok = naok + 1
+            val(1,naok) = id
+            val(2,naok) = m2data(multi,1,j,i) ! ID in MUST2
+            val(3,naok) = m2data(multi,2,j,i) ! E
+            val(4,naok) = m2data(multi,3,j,i) ! T
+           
+c            IF (multi.GT.100) THEN
+c               WRITE(*,*)' ANAPAW-M : [Encmust2] mult exceeds!'
+c            ENDIF
+c               
+c            IF (naok.GT.500) THEN
+c               WRITE(*,*)' ANAPAW-M : [Encmust2] naok exceeds!'
+c            ENDIF
+ 
+         ENDDO
+
+      ENDDO
+         
+      RETURN
+
+      END

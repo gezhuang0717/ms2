@@ -1,0 +1,23 @@
+opt stat
+zone 2 1
+ht 101 cont
+ht 102 cont
+wait
+zone 2 2
+ht 103 cont
+ht 104 cont
+ht 105 cont
+ht 106 cont
+wait
+ht 108 cont
+ht 109 cont
+ht 110 cont
+ht 111 cont
+wait
+zone 1 5
+ht 112
+ht 113
+ht 114
+ht 115
+ht 116
+wait

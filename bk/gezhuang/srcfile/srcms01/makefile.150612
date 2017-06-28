@@ -1,0 +1,44 @@
+# Makefile for anapaw used in nov09ivsm experiment
+#  make
+#+
+PROGRAM = anapaw
+#-
+#
+########## NEVER CHANGE ############
+FC       = gfortran
+CC       = gcc 
+CPP      = g++
+FFLAGS   =  -g -O3 -Wall -fno-f2c -funroll-loops -fbounds-check -rdynamic \
+           -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fsecond-underscore -fno-range-check
+LFLAGS   = -L$(CERNLIB) -lpawlib -lgraflib -lgrafX11  -lpacklib -lmathlib \
+           -lkernlib -Icern -lnsl -lreadline -ltermcap 
+#64bit
+LDLIBS   = -L/usr/X11R6/lib64 -lX11 -ldl -lcrypt -L$(ANAPAW_LIB) -lanalib \
+	   -lXt -lXaw -lpthread -L$(CERNLIB) -lpawlib -lgraflib -lgrafX11 \
+           -lpacklib -lmathlib -lkernlib -Icern -lnsl \
+	   -lreadline -ltermcap -lstdc++ -llapack -lblas -lexpat -lz
+#RTLIBS	 = $(shell $(ROOTSYS)/bin/root-config --libs)
+CPPFLAGS = 
+LDFLAGS  = 
+########## NEVER CHANGE ############
+
+##
+ADD      = encbeam.o
+
+##
+OBJS  =  usersrc.o usersub.o add_ntuple.o
+OBJS += $(ADD)
+OBJS += $(ANAPAW_LIB)/anapaw.o
+
+all: $(PROGRAM)
+
+usersrc.o: rawdata.fh analysevent.fh
+
+$(PROGRAM): $(OBJS) $(ANAPAW_LIB)/libanalib.a
+	$(FC) -o $@ $^ $(LDFLAGS) $(LDLIBS) $(RTLIBS)
+
+clean::
+	rm -f $(PROGRAM) *.f~ *.c~ *~ *.o
+
+.F.f: 
+	$(CPP) -o $@ $^

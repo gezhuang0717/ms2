@@ -1,0 +1,9 @@
+color 8 1 1 1
+opt liny
+opt logz
+ht 110
+zone 2 2
+htp colz
+hn colz
+hn colz
+hn colz

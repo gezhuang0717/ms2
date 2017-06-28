@@ -1,0 +1,9 @@
+hist1 = [1]
+hist2 = [2]
+
+	
+do i = 1 , 13
+ tmph1 = [hist1] + [i]
+ tmph2 = [hist2] + [i] 
+ supose  [tmph1] [tmph2]
+enddo

@@ -1,0 +1,55 @@
+# Makefile for anapaw used in nov09ivsm experiment
+#  make
+#+
+PROGRAM = anapaw
+#-
+#
+########## NEVER CHANGE ############
+FC       = g77
+CC       = gcc 
+CPP      = cpp
+FFLAGS   =  -g -O3 -Wall -fno-f2c -funroll-loops -fbounds-check -rdynamic \
+           -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE
+LFLAGS   = -L$(CERNLIB) -lpawlib -lgraflib -lgrafX11  -lpacklib -lmathlib \
+           -lkernlib -Icern -lnsl -lreadline -ltermcap 
+LDLIBS   = -L/usr/X11R6/lib64 -lX11 -ldl -lcrypt -L$(ANAPAW_LIB) -lanalib \
+	   -lXt -lXaw -lpthread -L$(CERNLIB) -lpawlib -lgraflib -lgrafX11 \
+           -lpacklib -lmathlib -lkernlib -Icern -lnsl -lreadline -ltermcap  \
+           -lstdc++ -llapack3 -lblas 
+RTLIBS   = -L/usr/cern/lib/root -lCore -lCint -lHist -lGraf -lGraf3d -lGpad \
+           -lTree -lRint -lPostscript -lMatrix -lPhysics -pthread -lm -ldl -rdynamic
+CPPFLAGS = 
+LDFLAGS  = 
+########## NEVER CHANGE ############
+
+##
+ADD      = enccoin.o \
+           encpla.o loadplaconf.o loadplaprm.o \
+	   encic.o loadicprm.o \
+	   encppac.o loadppacconf.o loadppacprm.o calcppac.o calcppacextra.o \
+           encimage.o loadimageprm.o \
+	   encmatrix.o loadmatrixconf.o loadmatrixprm.o \
+           encpid.o loadpidprm.o \
+	   enctotale.o loadtotaleprm.o \
+	   encm2adc.o encgeneric.o \
+	   encmust2.o loadmust2conf.o loadmust2prm.o
+
+##
+OBJS  =  usersrc.o usersub.o add_ntuple.o util.o
+# rayfit.o \
+#         readmat.o rec_delta.o rec_beta.o physutil.o
+OBJS += $(ADD)
+OBJS += $(ANAPAW_LIB)/anapaw.o
+
+all: $(PROGRAM)
+
+usersrc.o: rawdata.fh analysevent.fh
+
+$(PROGRAM): $(OBJS) $(ANAPAW_LIB)/libanalib.a
+	$(FC) -o $@ $^ $(LDFLAGS) $(LDLIBS) $(RTLIBS)
+
+clean::
+	rm -f $(PROGRAM) *.f~ *.c~ *~ *.o
+
+.F.f: 
+	$(CPP) -o $@ $^

@@ -1,0 +1,44 @@
+*** Begin of history file: Wed Nov  9 23:48:59 2016
+book ana/pi-ao2.ana
+a/l ridf/MS0128mod1.ridf
+cd rid
+she
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 150
+sh
+clear
+book ana/pi-ao2.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 151
+zone 1 2
+ht 151
+ht 152
+she
+clear
+book ana/pi-ao2.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 151
+hist/fit 151 g
+zone 1 2
+ht 151
+ht 152
+she
+she
+she
+she
+pwd
+ht 151
+zone 1
+ht 151
+ht 152
+i
+ht 129
+ht 129 colz
+zpne 1 2
+zone 1 2
+ht 129 colz
+ht 130 colz
+*** End   of history file: Thu Nov 10 10:41:59 2016

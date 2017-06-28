@@ -1,0 +1,34 @@
+ macro integrate_many ini=101 output='csv/count.csv'
+   name = [output]
+   read ini first histgram ID
+   fin = [ini]
+   read fin final histgram ID
+   read name output file name
+   if ([name]=[output]) then
+* if ([name]='') then
+* output = [output]
+   else
+     output = csv/[name]_count.csv
+   endif
+   
+   shell rm -rf [output]
+   
+   mess ID      Entries   Counts   Ratio[%]    Title
+   fmess 'id,Entries,Integration,Ratio,Title' [output]
+   
+   do i=0,[fin]-[ini]
+     id = [ini]+[i]
+* ht [id]
+     ent = $hinfo([id],'entries')
+     int = $hinfo([id],'sum')
+     eff = $sigma([int]/[ent]*100.)
+     title = $htitle([id])
+     mess [id]    [ent]     [int]    [eff]      [title]
+* fmess '[id]''[ent]''[int]''[eff]''[title]' '[output]'
+     fmess [id],[ent],[int],[eff],[title] [output]
+   enddo
+   mess output : [output]
+   
+ return
+ 
+   

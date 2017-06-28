@@ -1,0 +1,41 @@
+src/coin/map/coin.map 1
+src/rf/map/rf.map    1
+src/bld/map/ref.map    2
+#src/fpd/map/crdccathode.map 1
+#src/fpd/map/crdcanode.map 2
+#src/fpd/map/nyoki.map 2
+#src/winds/map/winds.map 2
+src/plastic/map/spla.map  4
+src/plastic/map/spla-qdc.map  1
+# w/ qdc data
+# src/tracker/map/tracker.map 2 
+src/uhodo/map/uhodoa.map 2
+src/uhodo/map/uhodod.map 2
+src/ppac/map/ppac.map.sharaq03 5
+#src/ppac/map/ppac.map 10
+src/bld/map/dc31.map  2
+src/bld/map/dc32.map  2
+#src/f3si/map/si.map 1
+#src/bld/map/dc61.map  2
+src/bld/map/dc71.map  2
+src/bld/map/dc72.map  2
+src/bld/map/dc91.map  2
+src/bld/map/dcx1.map  2
+src/bld/map/dcx2.map  2
+src/bld/map/dcs21.map  2
+src/bld/map/dcs22.map  2
+#src/bld/map/dcs0.map   2
+#src/bld/map/dcx0.map  2
+#src/dali/map/dali.map 3
+#src/dali/map/dalimult.map 4
+#src/fpd/map/nyoki.map 1
+src/diamond/map/diamond.map 5
+src/si/map/si.map 1
+src/stopper/map/stopper.map 2
+
+
+
+
+
+
+

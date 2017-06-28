@@ -1,0 +1,27 @@
+c---- trajectory.fh ----
+c  2010.9.29 edit by H.Miya
+c  2014.5.16 edit by S.Michimasa
+
+      integer X,Y,A,B,Z,T
+      parameter (X=1,Y=2,A=3,B=4,Z=5,T=6)
+
+      integer PL3,PL7,PL9,PLX,PLS20,PLS21,PLS22,PLS23
+      integer F3TR,F3DC,F3PP
+      integer F4,F5,F6,FH7,FH9,S0,S2
+      integer S0PP
+
+      parameter (PL3=1,PL7=2,PL9=3,PLX=4)
+      parameter (PLS20=5,PLS21=6,PLS22=7,PLS23=8)
+      parameter (F3TR=9,F3DC=10,F3PP=11)
+      parameter (F4=12,F5=13,F6=14,FH7=15,FH9=16,S0=17,S2=18)
+      parameter (S0PP=19)
+
+      integer nprm,ndetec
+c original:2014/5/16
+c      parameter (nprm=6,ndetec=18)
+c for SHARAQ03
+      parameter (nprm=6,ndetec=19)
+      
+      real Trj(nprm,ndetec)
+      
+      common/traject/Trj

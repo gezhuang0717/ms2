@@ -1,0 +1,10 @@
+      real ppac_fx(nfocus+1), ppac_fy(nfocus+1)
+      real ppac_fa(nfocus+1), ppac_fb(nfocus+1)
+      real ppac_ft(nfocus+1) 
+      integer ppac_fflag(nfocus+1)
+c     ppac_fflag =1:ok 0: bad
+      common /valppac/ppac_fx,ppac_fy,
+     &                ppac_fa,ppac_fb,
+     &                ppac_ft,ppac_fflag
+
+

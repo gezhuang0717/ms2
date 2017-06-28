@@ -1,0 +1,37 @@
+Macro afit
+
+* set ysize 28
+* zone 2 5
+flag_count=0
+v/cre tmppar(3) R
+v/cre par(3,16) R
+
+do i= 1,16
+ vid = [i]+100
+ wait
+*  if [flag_count].eq.10 then
+*    wait
+*    flag_count = 0
+*  endif
+  
+  vecx = 'X'//[vid]
+  vecy = 'Y'//[vid]  
+ gra 100 y[vid] x[vid] 'W*'
+ mess 'vector length = ',$VLEN([vecx])
+ 
+ if $VLEN([vecx]).ge.3 then
+   vec/fit [vecy] [vecx] ! p2 'S' ! tmppar
+   atitle 'tmpMASS.L'//[i] 'MASS.L'//[i] ! 220
+ elseif $VLEN([vecx]).le.2 then
+   v/input tmppar(3:3)  0.0 
+   vec/fit [vecy] [vecx] ! p1 'S' ! tmppar
+   atitle 'tmpMASS.L'//[i] 'MASS.L'//[i] ! 220
+ endif
+
+ v/copy tmppar(1:3) par(1:3,[i])
+ flag_count = [flag_count] +1
+enddo
+
+v/write par ! '( 2(F8.3,1X,F8.3,1X,E10.3, 3X))'
+
+exitm

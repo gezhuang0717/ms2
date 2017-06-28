@@ -1,0 +1,40 @@
+#!/bin/csh -f
+
+if ( $1 == 'anapaw' ) then
+setenv DALI_PRM       $USER_SOURCE/prm/dali.prm  
+setenv PPAC_PRM       $USER_SOURCE/prm/ppac.prm  
+		      
+setenv ART_MAPCONFIG  $USER_SOURCE/conf/mapper.conf
+
+setenv IHIT_MIN0 3
+
+echo ' '
+
+else if ($1 == 'chkenv') then
+
+echo ' '
+echo ' Local Environments are defined for ANAPAW.'
+echo ' '
+echo ' ANAPAW_USER    =' $ANAPAW_USER
+echo ' CERNLIB        =' $CERNLIB
+echo ' ANAPAW_HOME    =' $ANAPAW_HOME
+echo ' ANAPAW_LIB     =' $ANAPAW_LIB
+echo ' ANAPAW_SOURCE  =' $ANAPAW_SOURCE
+echo ' ANAPAW_MACROS  =' $ANAPAW_MACROS
+echo ' ANALOGON       =' $ANALOGON
+echo ' USER_SOURCE    =' $USER_SOURCE
+echo ' '
+echo ' DALI_PRM       =' $DALI_PRM       
+echo ' DALI_PRM       =' $PPAC_PRM       
+echo ' '
+echo ' ART_MAPCONFIG  =' $ART_MAPCONFIG  
+echo ' '
+
+else if ( ($1 == 'ihitmin' || $1 == 'ihitmin0') && $2 !="") then
+
+    setenv IHIT_MIN0 $2
+    echo 'IHIT_MIN0 =' $IHIT_MIN0
+
+endif
+
+#${HOME}/bin/listanapaw

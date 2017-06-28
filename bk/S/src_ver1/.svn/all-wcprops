@@ -1,0 +1,371 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/repos/anapaw/!svn/ver/269/usersrc/branches/ribf57
+END
+loadplaprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadplaprm.f
+END
+matrixprm.fh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/matrixprm.fh
+END
+rawdata.fh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/rawdata.fh
+END
+loadimageprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadimageprm.f
+END
+analysevent.fh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/analysevent.fh
+END
+ppacconf.fh
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/ppacconf.fh
+END
+encpla.f
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/anapaw/!svn/ver/269/usersrc/branches/ribf57/encpla.f
+END
+brho.fh
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/brho.fh
+END
+encgeneric.f
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/encgeneric.f
+END
+pidprm.fh
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/pidprm.fh
+END
+must2pos.fh
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/267/usersrc/branches/ribf57/must2pos.fh
+END
+calcppac.f
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/calcppac.f
+END
+matrixdata.fh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/matrixdata.fh
+END
+loadtotaleprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadtotaleprm.f
+END
+encimage.f
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/encimage.f
+END
+runstat.fh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/runstat.fh
+END
+encppac.f
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/268/usersrc/branches/ribf57/encppac.f
+END
+calcppacextra.f
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/calcppacextra.f
+END
+loadicprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadicprm.f
+END
+encm2adc.f
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/270/usersrc/branches/ribf57/encm2adc.f
+END
+util.f
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/util.f
+END
+enctotale.f
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/enctotale.f
+END
+fortree.fh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/267/usersrc/branches/ribf57/fortree.fh
+END
+commonprm.fh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/commonprm.fh
+END
+loadplaconf.f
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadplaconf.f
+END
+numbers.fh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/numbers.fh
+END
+loadmatrixprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadmatrixprm.f
+END
+usersrc.F
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/263/usersrc/branches/ribf57/usersrc.F
+END
+plasticprm.fh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/plasticprm.fh
+END
+setana
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/anapaw/!svn/ver/254/usersrc/branches/ribf57/setana
+END
+usersub.f
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/usersub.f
+END
+loadppacconf.f
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadppacconf.f
+END
+invmatrix.fh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/invmatrix.fh
+END
+loadmust2prm.f
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/267/usersrc/branches/ribf57/loadmust2prm.f
+END
+image.fh
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/image.fh
+END
+encmatrix.f
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/encmatrix.f
+END
+loadpidprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadpidprm.f
+END
+ppacfocus.fh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/ppacfocus.fh
+END
+encmust2.f
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/270/usersrc/branches/ribf57/encmust2.f
+END
+totale.fh
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/totale.fh
+END
+encpid.f
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/encpid.f
+END
+loadppacprm.f
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadppacprm.f
+END
+toga.fh
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/toga.fh
+END
+ic.fh
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/ic.fh
+END
+fldata.fh
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/fldata.fh
+END
+fpdata.fh
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/fpdata.fh
+END
+loadmatrixconf.f
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadmatrixconf.f
+END
+ppacprm.fh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/ppacprm.fh
+END
+analyslogic.fh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/analyslogic.fh
+END
+plasticconf.fh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/plasticconf.fh
+END
+Files
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/anapaw/!svn/ver/254/usersrc/branches/ribf57/Files
+END
+enccoin.f
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/enccoin.f
+END
+add_ntuple.f
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/add_ntuple.f
+END
+loadmust2conf.f
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/loadmust2conf.f
+END
+encic.f
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/anapaw/!svn/ver/268/usersrc/branches/ribf57/encic.f
+END
+matrixconf.fh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/matrixconf.fh
+END
+pid.fh
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/pid.fh
+END
+physdata.fh
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/physdata.fh
+END
+encmust2.f.20100430
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/anapaw/!svn/ver/252/usersrc/branches/ribf57/encmust2.f.20100430
+END
+must2conf.fh
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/anapaw/!svn/ver/261/usersrc/branches/ribf57/must2conf.fh
+END
+makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/anapaw/!svn/ver/261/usersrc/branches/ribf57/makefile
+END

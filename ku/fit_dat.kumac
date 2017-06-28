@@ -1,0 +1,38 @@
+macro fit_dat
+
+v/cre analog(4) r 163.41  227.45 314.41 631.46  1082.6
+v/cre timing(4) r 57.937  58.046 58.067 58.113  58.114
+
+
+*  v/del  x,y
+*  v/cre  x(100),y(100)
+*  v/read x,y [1] f7.2,1x,f7.2 ! -/#/
+*  *v/plot x%y 500 +
+*  
+******  Definition of parameters and Initial values for fitting
+*        parameters
+npara = 2
+vec/crea   param(2)
+vec/crea    step(2)
+vec/crea    pmin(2)
+vec/crea    pmax(2)
+vec/crea  errprm(2)
+*
+* Initial values
+*
+*=========
+vec/inp   param(1:[npara])  58.12 1.
+*=========
+*
+*Step size for parameters 
+*=========
+vec/inp   step(1:[npara]) 1.e-3  1.e-3  
+*=========
+* 
+* Boundary for parameters minimum and max
+vec/inp   pmin(1:[npara])  0.    -500.
+vec/inp   pmax(1:[npara])  200.   500.
+
+gra 100 analog timing wp*
+v/fit analog timing ! ./kumac/slew.f bqs [npara] param step pmin pmax errprm
+

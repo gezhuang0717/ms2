@@ -1,0 +1,11 @@
+
+      REAL    brhonmr(4)
+      INTEGER iddisfcs(maxmat)
+      REAL    dispersion(maxmat), dfcsbrho(maxmat)
+      INTEGER ndfcs, nmtrx, idmtrx(maxmat)
+      INTEGER iflag_highorder
+
+      COMMON/MATRIXPRM/ brhonmr, iddisfcs, dispersion, dfcsbrho, 
+     &	                ndfcs, nmtrx, idmtrx,
+     &                  iflag_highorder
+

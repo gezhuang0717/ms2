@@ -1,0 +1,76 @@
+c Analyzer 9 : enccoin
+      SUBROUTINE ENCCOIN(val,nx,ny,naok,
+     &     rawdata,nhitdata,hitdet,nhitdet,ndet,ndata)
+c---------------------------------------------------------------------------
+c ANALYZER 9 : COIN
+c---------------------------------------------------------------------------
+c Coin. Reg. Channel
+c  1: 
+c  2: 
+c  3: 
+c  4:
+c  5: coin
+c  6: DS F11(1/100)
+c  7: DS F3(1/100)
+c  8: DS DALI(1/1000)
+c  9: coin pileup
+c 10: DS F11 pileup
+c 11: DS F3 pileup
+c 12: DS DALI pileup
+c
+c   W#: 1   2         3        4 
+c       ID  ibit*100  ID or 0  ibit
+c---------------------------------------------------------------------------
+c     nDataMin                  : the number of required data (ihit_min0)
+c     hitDet(1:nHitDet)         : hit detector id, = id in mapfile
+c     nData(1:lenDet)           : the number of data for each id (ihit)
+c     nHitDet                   : the number of hit detector
+c     lenData                   : the length of array
+c     lenDet                    : the length of array
+
+      IMPLICIT NONE
+      INCLUDE 'analyslogic.fh'
+
+      INTEGER nx, ny, ndet, ndata, naok
+      INTEGER rawdata(ndata,ndet)
+      INTEGER nhitdata(ndet)
+      INTEGER hitdet(ndet)
+      INTEGER nhitdet
+      REAL    val(nx,ny)
+
+c local
+      INTEGER i,id
+      INTEGER ibit, imask, icoin, icoin2
+
+      IF (initencflag(9)) THEN
+         initencflag(9) = .FALSE.
+      ENDIF
+
+c     initialize
+      naok = 0
+
+      icoin  = rawdata(1,1)
+      icoin2 = ishft(rawdata(1,2),4)
+
+      DO i = 1, 16
+         naok = naok + 1
+         id = i
+         val(1,naok) = id
+         imask = 2**(i-1)
+         IF (i.GE.5 .AND. i.LE.8) THEN
+            ibit = iand(icoin2,imask)/imask
+         ELSE
+            ibit = iand(icoin,imask)/imask
+         ENDIF
+         val(2,naok) = ibit*100.
+         val(4,naok) = real(ibit)
+         IF (ibit.NE.0) THEN
+            val(3,naok) = i
+         ELSE
+            val(3,naok) = 0
+         ENDIF
+c         write(*,*)i,ibit
+      ENDDO
+
+      RETURN
+      END

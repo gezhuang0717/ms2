@@ -1,0 +1,32 @@
+*** Begin of history file: Tue Oct 25 17:38:07 2016
+book ana/pi-ao2.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 152
+she
+clear
+book ana/pi-ao2.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 191
+vec/create x1(100)
+vec/create y1(100)
+get_vect/contents 191 y1
+get_vect/abscissa 191 x1
+vec/print y1
+vec/print x1
+she
+clear
+book ana/pi-ao2.ana
+a/l ridf/MS02/run0128mod1.ridf
+i
+ht 191
+vec/create x1(200)
+vec/create y1(200)
+get_vect/contents 191 y1
+get_vect/abscissa 191 x1
+vec/print x1
+vec/print y1
+she
+exit
+*** End   of history file: Tue Oct 25 18:27:24 2016

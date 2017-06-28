@@ -1,0 +1,30 @@
+ output file : 26na_result.dat               26na_output.dat               
+Data file name : 26na_run0160_0161.dat                             
+ Number of points of data =          102
+ Number of parameters =            3
+ Number of free parameters =            3
+ Fitting region :            1  ->           50
+ Initial value of free parameters
+  AAI( 1) =  0.1000000000D+01
+  AAI( 2) =  0.2100000000D+03
+  AAI( 3) =  0.1000000000D+00
+
+
+ Fitting region(ch) :            1  -->           50
+ Fitting region (arb.) :    1.0000000000000000       -->    24.772277227722771     
+ Free parameters 
+  AA( 1) =  0.2991329342D+17 +-  0.8467784444D+20
+  AA( 2) = -0.7784653395D+20 +-  0.8671011270D+23
+  AA( 3) =  0.2697219557D+02 +-  0.0000000000D+00
+ chisq =    6475.9873205464401     
+ reduced chisq =    137.78696426694555     
+
+
+ Fitting region(ch) :            1  -->           50
+ Fitting region (arb.) :    1.0000000000000000       -->    24.772277227722771     
+ Free parameters 
+  AA( 1) =  0.2991329342D+17 +-  0.8467784444D+20
+  AA( 2) = -0.7784653395D+20 +-  0.8671011270D+23
+  AA( 3) =  0.2697219557D+02 +-  0.0000000000D+00
+ chisq =    6475.9873205464401     
+ reduced chisq =    137.78696426694555     

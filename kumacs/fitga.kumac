@@ -1,0 +1,11 @@
+ macro fga [id]
+   
+   v/cre para(3) R
+   v/cre erpara(3) R
+   xmin = $hinfo([id],'xmin')
+   xmax = $hinfo([id],'xmax')
+   hi/fit [id]([xmin].:[xmax].) g "" 0 para "" "" "" erpara
+   v/print para
+   v/print erpara
+   
+   return

@@ -1,0 +1,22 @@
+macro chkthr HIST
+
+xbin  = $HINFO([1],'XBINS')
+v/cre absx([xbin])
+v/cre cony([xbin])
+
+hist/get_vec/abs  [hist] absx
+hist/get_vec/cont [hist] cony
+
+DO I=1, [xbin]
+      if cony([i]).gt.0. then
+      THR = absx([i])
+      goto MITUKETA
+      endif
+ENDDO
+
+MITUKETA:
+
+ht [HIST]      
+mess HID = [HIST], THR = [THR]
+      
+exitm

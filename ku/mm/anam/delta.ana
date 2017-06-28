@@ -1,0 +1,42 @@
+analys
+1
+4
+2
+5
+xygate
+@,cut/pi.cut
+@,cut/76.cut
+gate
+or
+and
+gate
+cccccc
+c PI c
+cccccc
+hst2
+0,	2,400,400,16, 2,132,132,22, 400,180.,240., 400,3500.,4500, 'TOF3s vs F3 IC'
+1079,	2,400,400,16, 2,132,132,22, 400,180.,240., 400,3500.,4500, 'TOF3s vs F3 IC ge'
+1080,	2,400,400,16, 2,132,132,22, 400,180.,240., 400,3500.,4500, 'TOF3s vs F3 IC ga'
+1082,	2,400,400,16, 2,132,132,22, 400,180.,240., 400,3500.,4500, 'TOF3s vs F3 IC zn'
+c0,	2,400,400,12, 2,400,400,26, 400,50.,60., 400,1500.,2500, 'TOF23 vs F3 Si1'
+c0,	2,400,400,12, 2,400,400,28, 400,50.,60., 400,1500.,2500, 'TOF23 vs F3 Si2'
+c
+c0,	2,400,400,16, 2,400,400,22, 400,50.,60., 400,1500.,2500, 'TOF3S0 vs F3 IC'
+c0,	2,400,400,16, 2,400,400,26, 400,50.,60., 400,1500.,2500, 'TOF3S0 vs F3 Si1'
+c0,	2,400,400,16, 2,400,400,28, 400,50.,60., 400,1500.,2500, 'TOF3S0 vs F3 Si2'
+c
+hst1
+0, 5,201,300,3, 50000,0.,50000., 'delta-rayL multihit in nsec' 
+0, 5,301,400,3, 50000,0.,50000., 'delta-rayR multihit in nsec' 
+0, 5,201,400,3, 50000,0.,50000., 'delta-ray(LorR) multihit in nsec' 
+1079, 5,201,300,3, 50000,0.,50000., 'delta-rayL multihit in nsec ge' 
+1079, 5,301,400,3, 50000,0.,50000., 'delta-rayR multihit in nsec ge' 
+1079, 5,201,400,3, 50000,0.,50000., 'delta-ray(LorR) multihit in nsec ge'
+1080, 5,201,300,3, 50000,0.,50000., 'delta-rayL multihit in nsec ga' 
+1080, 5,301,400,3, 50000,0.,50000., 'delta-rayR multihit in nsec ga' 
+1080, 5,201,400,3, 50000,0.,50000., 'delta-ray(LorR) multihit in nsec ga' 
+1082, 5,201,300,3, 50000,0.,50000., 'delta-rayL multihit in nsec zn' 
+1082, 5,301,400,3, 50000,0.,50000., 'delta-rayR multihit in nsec zn' 
+1082, 5,201,400,3, 50000,0.,50000., 'delta-ray(LorR) multihit in nsec zn' 
+c
+end

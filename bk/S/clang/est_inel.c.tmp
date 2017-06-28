@@ -1,0 +1,318 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include "nrutild.h"
+
+#define LEN      1000  /* Number of character */
+#define PMAX57   3.    /* Maximum dp/p of corrected delta57 */
+#define PMIN57   -3.   /* Minimum dp/p of corrected delta57 */
+#define BIN57    300.  /* BIN size of delta57 data */
+#define FTOL     2.  /* tollerance in function, amoeba */
+
+//double ran1(long *iseed);
+//void locate(double xx[], unsigned long n, double x, unsigned long *j);
+double chifunc(double *p);
+void mkhist(double val,double min,double max,int bin,double count[]);
+double dp2e(int nmass,int natom,double dp,double brho);
+double e2dp(int nmass,int natom,double ein,double brho);
+
+/* shared variables */
+double ec,*cexp,*csim,*eout,*pout,*dpcor,pave,inel_max;
+double BRHO35,BRHO57,thickt;
+int A,Z,isotp,nevent,LIMIT;
+
+int main (void) {
+
+  char input[50],file57[50],tmp[50],output[50]="inelsim_",*c,buff[LEN];
+  //  char output[50]="momentum.dat",output2[50]="dpcor.dat",gpfile[50]="compare.gp";
+  FILE *fin,*fout,*gp;
+  double **p,*y,*min,*max,csqo=0.,chisq,csqtgt,*d57,dp57,dp,dp35;
+  double inel_min,ninel,dinel,nexp,rinel,drinel;
+  double aa,bb,x1,x2,y1,y2,binmax;
+  int i,j,nbin,ol,nl,ndim,nfunk;
+  long iseed={8234587};
+
+  /* read parameter file */
+  printf("input file : ");
+  scanf("%s", &input);
+  printf("%s\n", input);
+  fin=fopen(input, "r");
+  if(fin==NULL) {
+    printf("can't open %s\n",input);
+    exit(1);
+  }
+  j=0;
+  while(fgets(buff,LEN,fin) != NULL) {
+    c=buff;
+    c=strtok(c, ", \n\r");
+    if(j==0) A=atoi(c);              /* Mass number */
+    if(j==1) Z=atoi(c);              /* Atomic number */
+    if(j==2) dp35=strtod(c,NULL);    /* mean value of delta35 [%] */
+    if(j==3) BRHO35=strtod(c,NULL);  /* Brho35 [Tm] */
+    if(j==4) BRHO57=strtod(c,NULL);  /* Brho57 [Tm] */
+    if(j==5) strcpy(file57,c);       /* Experimental data */
+    if(j==6) LIMIT=atoi(c);          /* Starting  position of tail [BIN] */
+    if(j==7) csqtgt=strtod(c,NULL);  /* Target chi-square */
+    if(j==8) thickt=strtod(c,NULL);  /* Thickness of reaction target [mm] */
+    if(j==9) nevent=atoi(c);         /* Number of events for simulation */
+    c=NULL;
+    j++;
+  }
+  fclose(fin);
+
+  /* read delta57 data*/
+  dp57=(PMAX57-PMIN57)/BIN57;  /* dp/p per 1bin */
+  d57=dvector(0,BIN57);
+  cexp=dvector(0,BIN57);
+
+  fin=fopen(file57, "r");
+  if(fin==NULL) {
+    printf("can't open %s\n",file57);
+    exit(1);
+  }
+  j=0;
+  nexp=0.;
+  while(fgets(buff,LEN,fin) != NULL) {
+    c=buff;
+    c=strtok(c, ", \n\r");
+    d57[j]=j*dp57+PMIN57;           /* dp/p 57 */
+    cexp[j]=strtod(c,NULL);         /* counts of experimental data */
+    nexp+=cexp[j];                  /* total event of experimental data */
+    c=NULL;
+    j++;
+  }
+  fclose(fin);
+  /*----------------end of file reading----------------*/
+
+  ec=dp2e(A,Z,dp35,BRHO35);     /* beam energy [MeV/u] */
+
+  ndim=2;
+  min=dvector(1,ndim);
+  max=dvector(1,ndim);
+  min[1]=0.1;           /* minimum value of slope */
+  min[2]=1.e-4;         /* minimum value of amplification */
+  max[1]=3.;            /* maximum value of slope */
+  max[2]=1.e-1;         /* maximum value of amplification */
+
+  /* difine vector for amoeba */
+  p=dmatrix(1,ndim+1,1,ndim);
+  y=dvector(1,ndim+1);
+  p[1][1]=1.;          /* initial slope value */
+  p[1][2]=0.02;        /* initial amplification */
+
+  eout=dvector(0,nevent);
+  pout=dvector(0,nevent);
+  dpcor=dvector(0,nevent);
+  csim=dvector(0,BIN57);
+
+  isotp=1;  /* never change! to calculate the offset value for dp/p */
+  chifunc(p[1]); /* to get offset of dp */
+  isotp=2;   /* set isotp=2 to simulate the inelastic event */
+
+  nl=0;
+  do{
+
+    for(i=2;i<=ndim+1;i++) /* initialize matrix for amoeba */                   
+      for(j=1;j<=ndim;j++){
+	if(j==i-1) p[i][j]=min[j]+(max[j]-min[j])*ran1(&iseed);
+	else p[i][j]=p[1][j];
+      }
+    for(i=1;i<=ndim+1;i++) y[i]=chifunc(&(p[i][1])-1);
+
+    amoeba(p,y,ndim,FTOL,chifunc,&nfunk);  /* simplex minimization */
+
+  if(nfunk>=0){                /* normal end in amoeba */
+    for(i=1,ol=0;i<=ndim;i++)  /* check if parametes are within range */
+      if(p[1][i]<min[i] || p[1][i]>max[i]) ol=i;
+    printf("Loop#%d: csq=%.2lf ",++nl,y[1]);
+      printf("%s\n",(ol!=0)?" [out of range]":"");
+    if(ol!=0||fabs((y[1]-csqo)/y[1])<1.0E-2) /* if over-range or no change in csq */
+      for(i=1;i<=ndim;i++){
+	if(p[1][i]<min[i] || p[1][i]>max[i]) /* print over-ranged parameters */
+	  printf(" p[%d]=%s%f (min:%s%f,max:%s%f)\n", i,(p[1][i]<0)?"":" ",
+		 p[1][i],(min[i]<0)?"":" ",min[i],(max[i]<0) ?"":" ",max[i]);
+	p[1][i]=min[i]+(max[i]-min[i])*ran1(&iseed); /* initialize parameters */
+      }
+    csqo=y[1];  /* store chi-square value */
+  }
+  }while(csqo>csqtgt || csqo<1.); /* exit loop */
+
+  chisq=chifunc(p[1]);   /* chi-square */
+
+  x1=d57[LIMIT];
+  y1=csim[LIMIT];
+  for(j=LIMIT;j<BIN57;j++) {
+    if(csim[j]>0.) {
+      x2=d57[j];
+      y2=csim[j];
+      binmax=j;
+    }
+  }
+  bb=log10(y1/y2)/(x1-x2);  /* slope of function for minimum estimation */
+  aa=y1/pow(10.,bb*x1);     /* amplification of function for minimum estimation */
+
+  inel_min=0.;
+  for(j=0;j<LIMIT;j++) inel_min+=csim[j]; /* count to LIMIT */
+  for(j=LIMIT;j<=binmax;j++) inel_min+=aa*pow(10.,bb*d57[j]); /* count to binmax*/
+
+  ninel=(inel_max + inel_min)/2.;  /* average of inel. events */
+  dinel=inel_max-ninel;            /* error of events */
+  rinel=ninel/nexp;                /* the ratio of inela. events */
+  drinel=dinel/nexp;               /* error of ratio */
+
+  /* output results to terminal */
+  printf("------simulation finished!------\n");
+  printf("parameter list\n");
+  printf("%d %d %lf %lf %lf %lf %d\n", A,Z,dp35,BRHO35,BRHO57,thickt,nevent);
+  printf("delta57 file : %s\n\n", file57);
+  printf("chi-square = %lf\n",  chisq);
+  printf("amp=%lf, mag=%lf\n", p[1][1],p[1][2]);
+  printf("maximum estimation = %lf\n", inel_max);
+  printf("minimum estimation = %lf\n", inel_min);
+  printf("Ninel = %lf (+- %lf)\n", ninel,dinel);
+  printf("Ninel/Nexp = %.8lf (+-%.8lf)\n",rinel,drinel);
+
+  /* output results to file */
+  strcpy(tmp,input);
+  strtok(tmp,".");
+  strcat(output,tmp);
+  strcat(output,".csv");
+  fout=fopen(output,"w");
+  fprintf(fout, "input file,%s\n", input);
+  fprintf(fout, "A,Z,delta35[%],Brho35,Brho57,Exp. data,thickness[mm],events\n");
+  fprintf(fout, "%d,%d,%lf,%lf,%lf,%s,%lf,%d\n", A,Z,dp35,BRHO35,BRHO57,file57,thickt,nevent);
+  fprintf(fout, "chisq,target,slope,amp,a(minfunc),b(minfunc)\n");
+  fprintf(fout, "%lf,%lf,%lf,%lf,%lf,%lf\n",chisq,csqtgt,p[1][1],p[1][2],aa,bb);
+  fprintf(fout, "Nmax,Nmin,Nave,dN,Nexp,Ninel/Nexp,d(Nexp/Ninel)\n");
+  fprintf(fout, "%lf,%lf,%lf,%lf,%.0lf,%.8lf,%.8lf\n\n", 
+          inel_max,inel_min,ninel,dinel,nexp,rinel,drinel);
+//  fprintf(fout, "chisq,target,slope,amp,Nmax,Nmin,Nave,dN,Nexp,Ninel/Nexp,d(Nexp/Ninel)\n");
+//  fprintf(fout, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%.0lf,%.8lf,%.8lf\n\n", 
+//          chisq,csqtgt,p[1][1],p[1][2],inel_max,inel_min,ninel,dinel,nexp,rinel,drinel);
+  for(j=0;j<BIN57;j++) {
+    fprintf(fout,"%lf,%lf,%lf\n", d57[j],cexp[j],csim[j]);
+  }
+  fclose(fout);
+  printf("output file : %s\n", output);
+
+  /* gnuplot */
+  dp=LIMIT*(PMAX57-PMIN57)/BIN57+PMIN57;    /* border line */
+  //  printf("limit = %lf\n", dp);
+  gp=popen("gnuplot -persist","w");
+  fprintf(gp, "set datafile separator \",\"\n");
+  fprintf(gp, "set logscale y\n");
+  fprintf(gp, "set yrange [0.1:10000]\n");
+  fprintf(gp, "set arrow from %lf,0.1 to %lf,10000 nohead lc 1\n", dp,dp);
+  fprintf(gp, "plot \"%s\" using 1:2 every ::8 w p lc 0,", output);
+  fprintf(gp, "\"%s\" using 1:3 every ::8 w l lc 3\n", output);
+  fprintf(gp, "replot %lf*10**(%lf*x) lc 2\n",aa,bb);
+  fclose(gp);
+
+//  fout=fopen(output2,"w");
+//  for(j=0;j<nevent;j++) fprintf(fout, "%lf %lf\n", pin[j],dpcor[j]);
+//  fclose(fout);
+//
+//  fout=fopen(output, "w");
+//  for(i=0;i<nevent;i++) fprintf(fout, "%lf %lf\n", pin[i],pout[i]);
+//  fclose(fout);
+//
+//  printf("output file : %s\n", output);
+
+  return 0;
+}
+
+double chifunc(double *p) {
+
+  double chi2,weight;
+  int i,j,*ia;
+
+  sim_(&A,&Z,&isotp,&p[1],&thickt,&nevent,&ec,eout); /* for one energy */
+
+  for(j=0;j<nevent;j++) {
+    pout[j]=e2dp(A,Z,eout[j],BRHO57);
+  }
+  if(isotp==1) {
+    pave=0.;
+    for(j=0;j<nevent;j++) pave+=pout[j];
+    pave=pave/nevent;
+  }
+  if(pave==0.) {
+    printf("Pave=0!\n");
+    exit(1);
+  }
+  for(j=0;j<nevent;j++) dpcor[j]=pout[j]-pave; /* delta57 correction */
+
+  for(j=0;j<BIN57;j++) csim[j]=0.;
+
+  /* make histgram */
+  for(i=0;i<nevent;i++) {
+     mkhist(dpcor[i],PMIN57,PMAX57,BIN57,csim);
+  }
+  inel_max=0.;
+  for(j=0;j<BIN57;j++) {
+    csim[j]=p[2]*csim[j];
+    inel_max+=csim[j];
+  }
+  chi2=0.;
+  i=0;
+  for(j=0;j<LIMIT;j++) {
+    if(csim[j]>0.) {
+      weight=1/sqrt(csim[j]);
+      chi2+=pow((cexp[j]-csim[j])*weight,2);
+      i++;
+    }
+  }
+  chi2=chi2/i;
+
+  return chi2;
+}
+
+void mkhist(double val,double min,double max,int bin,double count[]) {
+
+  double ch;
+  int i;
+
+  ch=(val-min)/(max-min)*bin;
+  i=(int)ch;
+  if(i>=0 && i<=bin) count[i]+=1.;
+
+  return;
+}
+
+double dp2e(int nmass,int natom,double dp,double brho) {
+/* return dp/p, ein [MeV/u] */
+
+  double mu=1.66053892e-27; /* kg */
+  double c=2.99792458e+8;   /* m/s */
+  double e=1.60217657e-19;  /* C */
+  double mo,p,etot,po,ke;
+
+  mo=mu*pow(c,2)/e*1.e-6;   /* ~931.5 [MeV/c2] */
+//  etot=nmass*(ein+mo);   /* MeV */
+//  p=sqrt(pow(etot,2)-pow(nmass*mo,2));  /* MeV/c */
+  po=natom*brho*c*1.e-6; /* MeV/c */
+  p=po*(1.+dp/100.);     /* MeV/c */
+  //  ke=sqrt(pow(p,2)+pow(nmass*mo,2))-nmass*mo;
+  ke=pow(p,2)+pow(nmass*mo,2);
+  ke=sqrt(ke);
+  ke=ke-nmass*mo;
+
+  return ke/nmass; /* Energy [MeV/u] */
+}
+
+double e2dp(int nmass,int natom,double ein,double brho) {
+/* return dp/p, ein [MeV/u] */
+
+  double mu=1.66053892e-27; /* kg */
+  double c=2.99792458e+8;   /* m/s */
+  double e=1.60217657e-19;  /* C */
+  double mo,p,etot,po;
+
+  mo=mu*pow(c,2)/e*1.e-6;   /* ~931.5 [MeV/c2] */
+  etot=nmass*(ein+mo);   /* MeV */
+  p=sqrt(pow(etot,2)-pow(nmass*mo,2));  /* MeV/c */
+  po=natom*brho*c*1.e-6; /* MeV/c */
+
+  return (p-po)/po*100.; /* dP/P [%] */
+}

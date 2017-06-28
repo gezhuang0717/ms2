@@ -1,0 +1,30 @@
+Macro peak
+
+******  Definition of parameters and Initial values for fitting
+        parameters
+npara = 5
+vec/crea   param(5)
+vec/crea    step(5)
+vec/crea    pmin(5)
+vec/crea    pmax(5)
+vec/crea  errprm(5)
+*
+* Initial values
+*
+*=========
+vec/inp   param(1:[npara])  1.e6  1977.  0.6  0.  1.e3
+*=========
+*
+*Step size for parameters 
+*=========
+vec/inp   step(1:[npara]) 1.e0  1.e-1  1.e-2  1.e-1 1.e0
+*=========
+*
+* Boundary for parameters minimum and max
+vec/inp   pmin(1:[npara])  1.0e0  1975. 0.3   -1.e3   0.
+vec/inp   pmax(1:[npara])  1.0e7  1979. 3.5    1.e3  1.e7
+*
+****** Call MINUIT routine
+hi/fit [1](1970.:1985.) ./kumac/func.f BEV [npara] param step pmin pmax errprm
+*
+******

@@ -1,0 +1,8 @@
+*book ana/gamma.ana
+*
+ana/loop ./rdf/0018.rdf b ; mess RUN 18 end.
+ana/loop ./rdf/0019.rdf b ; mess RUN 19 end.
+ana/loop ./rdf/0020.rdf b ; mess RUN 20 end.
+ana/loop ./rdf/0021.rdf b ; mess RUN 21 end.
+ana/loop ./rdf/0022.rdf b ; mess RUN 22 end.
+*

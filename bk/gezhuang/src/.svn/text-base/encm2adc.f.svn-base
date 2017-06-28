@@ -1,0 +1,103 @@
+c Analyzer 20 : Encm2adc
+      SUBROUTINE Encm2adc(val,nx,ny,naok,
+     &     rawdata,nhitdata,hitdet,nhitdet,ndet,ndata)
+c---------------------------------------------------------------------------
+c ANALYZER 20 : MUST2-ADC
+c---------------------------------------------------------------------------
+c
+cID = 1-32 : ADC
+c
+cW# : 1      2   
+c     ID     DATA
+c
+cID = 33 : GATCONF
+c
+cW# : 1      2   
+c     ID     DATA
+c
+cID = 101 -116: Trigger register
+cW# : 1      2     3
+c     ID     1/0  i(register number)
+c register number
+c 1: MUST2-1
+c 2: MUST2-2
+c 3: MUST2-3
+c 4: MUST2-4
+c 5: MUST2-5
+c 6: MUST2-6
+c 7: MUST2-7
+c 8: MUST2-8
+c 9: F8PPAC1or(DownScaled 1/3000)
+c10: F8PPAC2or(DownScaled 1/3000)
+c11: F8PPAC3or(DownScaled 1/3000)
+c12: F7Plastic(DownScaled 1/3000)
+
+c---------------------------------------------------------------------------
+c
+
+      IMPLICIT NONE
+      INCLUDE 'analyslogic.fh'
+      INCLUDE 'commonprm.fh'
+      INCLUDE 'fortree.fh'
+
+      INTEGER nx, ny, ndet, ndata, naok
+      INTEGER rawdata(ndata,ndet)
+      INTEGER nhitdata(ndet)
+      INTEGER hitdet(ndet)
+      INTEGER nhitdet
+      REAL    val(nx,ny)
+
+c local
+      INTEGER i,id
+      INTEGER ibit(16), imask,icoin
+
+      IF (initencflag(20)) THEN
+         initencflag(20) = .FALSE.
+      ENDIF
+
+      do i=1,16
+         trig(i) = 0
+      enddo
+      gatconf = -1000.
+      mm_left_plf7 = -1000.
+      mm_left_ppac = -1000.
+
+      naok = 0
+
+      DO i = 1, nhitdet, 1
+         naok = naok + 1
+         id = hitdet(i)         ! label of parameter
+         val(1,naok) = id
+         val(2,naok) = rawdata(1,id)
+         val(11,naok) = rawdata(1,id)
+      ENDDO
+      
+      
+      IF(rawdata(1,33).ge.0) THEN
+         gatconf = rawdata(1,33)
+      ENDIF
+      mm_left_plf7 = rawdata(1,1)
+      mm_left_ppac = rawdata(1,2)
+
+c     gatconf = icoin
+      icoin = rawdata(1,33)
+
+      DO i=1,16
+         ibit(i) = 0
+         id = 100 + i
+         naok = naok + 1
+         val(1,naok) = id
+         imask = 2**(i-1)
+         ibit(i) = iand(icoin,imask)/imask
+         val(2,naok) = REAL(ibit(i))
+         IF ( ibit(i).NE.0 ) THEN
+            val(3,naok) = REAL(i)
+            trig(i) = 1
+         ELSE
+            val(3,naok) = 0.
+         ENDIF
+      ENDDO
+
+      RETURN
+
+      END

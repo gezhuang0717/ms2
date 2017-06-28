@@ -1,0 +1,23 @@
+ macro many_integrate ini=101 fin=101
+   output='int.csv'
+   read ini first histgram ID
+   read fin first histgram ID
+   
+   mess ID      Entries   counts   ratio[%]    Title
+   
+   do i=0,[fin]-[ini]
+     id = [ini]+[i]
+* ht [id]
+     ent = $hinfo([id],'entries')
+     int = $hinfo([id],'sum')
+     eff = $sigma([int]/[ent]*100.)
+     title = $htitle([id])
+     mess [id]    [ent]     [int]    [eff]      [title]
+* fmess '[id]''[ent]''[int]''[eff]''[title]' '[output]'
+     fmess [id],[ent],[int],[eff],[title] [output]
+   enddo
+   mess output : [output]
+   
+ return
+ 
+   

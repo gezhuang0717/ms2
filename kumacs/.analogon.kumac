@@ -1,0 +1,45 @@
+defaults $ANAPAW_MACROS
+host_psview gv
+option fit
+ option grid
+ opt stat
+set fit 111
+ set vsiz 0.4
+* set vsiz 0.25
+set tsiz 0.34
+set tfon -20
+set gfon -60
+set lfon -600
+set vfon -20
+set cfon -20
+set xlab 1.2
+set ylab 0.6
+set yhti 0.95
+graphics/viewing/size 18. 18.
+set ncol 28
+pal 1
+ set htyp -3
+ color 8 1 1 1
+ set hcol 1012
+
+ opt ndat
+ opt nbox 'no flame'
+  exec ini_alias
+  
+ min 0 0.5
+ alias/cre hc 'exe ./kumac/ht_colz.kumac'
+ alias/cre hnc 'op liny;min 0 0.5;hn colz'
+ alias/cre hbc 'op liny;min 0 0.5;hb colz'
+ alias/cre fgr 'exe ./kumac/fitgr.kumac'
+ alias/cre fga 'exe ./kumac/fitga.kumac'
+ alias/cre fga_many 'exe ./kumac/fitga_many.kumac'
+ alias/cre int 'exe ./kumac/integrate.kumac'
+ alias/cre int_many 'exe ./kumac/integrate_many.kumac'
+ alias/cre on 'exe ./on_num.kumac'
+ alias/cre manyfiga 'exe ./kumac/many_figa.kumac'
+ alias/cre 1dv 'exe ./kumac/1dvec.kumac'
+ alias/cre 2dv 'exe ./kumac/2dvec.kumac'
+ alias/cre cor_coef 'exe ./kumac/correlation_coef.kumac'
+ alias/cre cor_coef_many 'exe ./kumac/correlation_coef_many.kumac'
+ alias/cre pdf1d 'exe ./kumac/pdf_1d.kumac'
+ alias/cre pdf2d 'exe ./kumac/pdf_2d.kumac'

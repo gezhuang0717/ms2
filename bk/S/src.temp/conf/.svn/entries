@@ -1,0 +1,124 @@
+8
+
+dir
+269
+http://ribfdaq/svn/repos/anapaw/usersrc/branches/ribf57/conf
+http://ribfdaq/svn/repos/anapaw
+
+
+
+2010-05-17T20:52:34.275902Z
+258
+daq
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b8b8a78c-4fb9-42c1-839a-7d3e7c6a53ef
+
+ppac
+dir
+
+plastic.conf
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+0f741bff3f02a2b1536113f09ba08fc1
+2010-05-17T20:51:59.932029Z
+257
+daq
+
+matrix
+dir
+
+fl.conf
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+a6ce9f3b34378f9713a53386427b94fa
+2010-05-17T20:51:59.932029Z
+257
+daq
+
+matrix.conf.orig
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+2ad069f628a15e7f0229432225cbd9d2
+2010-05-17T20:52:34.275902Z
+258
+daq
+
+ppac.conf
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+1120a1b186b995dc55688263226549ec
+2010-05-17T20:51:59.932029Z
+257
+daq
+
+mapper.conf
+file
+
+
+
+
+2010-05-18T06:53:05.000000Z
+7e27f81f8e842302bb68b58d0c8d8cbe
+2010-05-17T20:50:08.047030Z
+253
+daq
+
+matrix.conf
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+8fd90e0d6d68ce0c8cc36f9c2281c28e
+2010-05-17T20:51:59.932029Z
+257
+daq
+
+must2
+dir
+
+map
+dir
+
+must2.conf
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+f9705577150b064201d880307776abea
+2010-05-17T20:51:59.932029Z
+257
+daq
+

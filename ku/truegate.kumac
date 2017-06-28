@@ -1,0 +1,27 @@
+macro truegate [lid] [fitmin] [fitmax]
+
+hid = [lid] + 1000
+	
+v/cre info(1) R [lid]
+v/cre par(6) R 1000. 0. 3.  0. 0. 0.
+hi/fit [hid]([fitmin]:[fitmax]) g+p2 ! 6 par
+
+application comis QUIT
+	vector par,info
+	integer i
+	real gmin, gmax
+
+	gmin = par(2) - 3.*par(3)
+	gmax = par(2) + 3.*par(3)
+
+	write(*,100) int(info(1)), gmin, gmax
+ 100	format(i4,2(f12.2))
+end
+QUIT
+
+v/del par
+v/del info	
+
+	
+exitm
+

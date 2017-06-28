@@ -1,0 +1,25 @@
+book ana/rmd.ana
+*
+ana/loop ./ridf/run0145.ridf b ; mess RUN 0145 end.
+ana/loop ./ridf/run0146.ridf b ; mess RUN end.
+ana/loop ./ridf/run0147.ridf b ; mess RUN end.
+ana/loop ./ridf/run0148.ridf b ; mess RUN  end.
+ana/loop ./ridf/run0149.ridf b ; mess RUN  end.
+ana/loop ./ridf/run0150.ridf b ; mess RUN end.
+ana/loop ./ridf/run0151.ridf b ; mess RUN  end.
+ana/loop ./ridf/run0152.ridf b ; mess RUN  end.
+ana/loop ./ridf/run0153.ridf b ; mess RUN end.
+ana/loop ./ridf/run0154.ridf b ; mess RUN end.
+ana/loop ./ridf/run0155.ridf b ; mess RUN end.
+ana/loop ./ridf/run0156.ridf b ; mess RUN end.
+ana/loop ./ridf/run0157.ridf b ; mess RUN end.
+ana/loop ./ridf/run0158.ridf b ; mess RUN end.
+
+ana/loop ./ridf/run0166.ridf b ; mess RUN 0166 end.
+ana/loop ./ridf/run0167.ridf b ; mess RUN 0167 end.
+ana/loop ./ridf/run0168.ridf b ; mess RUN 0168 end.
+ana/loop ./ridf/run0169.ridf b ; mess RUN 0169 end.
+ana/loop ./ridf/run0170.ridf b ; mess RUN 0170 end.
+ana/loop ./ridf/run0171.ridf b ; mess RUN 0171 end.
+*
+hstore injet_0145-0158_01660171_rmd.hbk

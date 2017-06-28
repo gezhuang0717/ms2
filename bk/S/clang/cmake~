@@ -1,0 +1,10 @@
+rm -rf est_inel
+#icc -c est_inel_150128.c nrutild.c amoebad.c amotryd.c ran1d.c mnbrakd.c goldend.c
+#
+#ifort -nofor_main -o est_inel est_inel_150128.o nrutild.o amoebad.o amotryd.o ran1d.o mnbrakd.o goldend.o dee_150128.f eloss.f gausran.f sogran.f ran.f rrange.f cfdqr2.f qrtrn.f coef.f mtxinv.f flval2.f mlhfit.f exp.f dexp.f d2exp.f
+#
+icc -c est_inel.c nrutild.c amoebad.c amotryd.c ran1d.c mnbrakd.c goldend.c
+#
+ifort -nofor_main -o est_inel est_inel.o nrutild.o amoebad.o amotryd.o ran1d.o mnbrakd.o goldend.o dee_150303.f eloss.f gausran.f sogran.f ran.f rrange.f cfdqr2.f qrtrn.f coef.f mtxinv.f flval2.f mlhfit.f exp.f dexp.f d2exp.f
+#ifort -nofor_main -o est_inel est_inel.o nrutild.o amoebad.o amotryd.o ran1d.o mnbrakd.o goldend.o dee.f eloss.f gausran.f sogran.f ran.f rrange.f cfdqr2.f qrtrn.f coef.f mtxinv.f flval2.f mlhfit.f exp.f dexp.f d2exp.f
+cp est_inel ../est_inel

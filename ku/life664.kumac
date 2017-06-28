@@ -1,0 +1,98 @@
+ MACRO pulsing hist min=0. max=1000.0 opt=mbe
+   exe kumac/fitlife#load
+   
+   npar = 6
+*
+   vec/cre tmppar([npar]) r 100.  0.5   [max]  1e3   1e4   0.0   0.0
+   vec/cre tmpste([npar]) r 1e-5  1e-5  1e-5  1e-5  1e-5  1e-5  1e-5
+   vec/cre tmpmin([npar]) r 0.0   0.55  $sigma([max]*0.9)  0.0   0.0   0.0   0.0
+   vec/cre tmpmax([npar]) r 1e3   0.45  $sigma([max]*1.1)  1e5   1e6  +1e4  +1e4
+   vec/cre tmperr([npar]) r 1.0   1.0   1.0   1.0   1.0   1.0   1.0
+         
+   application hminuit exit
+     fix       3 6
+     improve
+     migrad
+     minos
+   exit 
+   
+   hi/fit [hist]([min]:[max]) pulsing [opt] [npar] tmppar tmpste tmpmin tmpmax tmperr
+   
+   hi/plo [hist]([min]:[max]) e
+   
+   message 'halflife is ' $sigma(tmppar(1)*log(2)) '+-' $sigma(tmperr(1)*log(2)) 
+ RETURN
+
+ MACRO laplace hist min=0. max=1000.0 opt=mbe
+   exe kumac/fitlife#load
+   
+   npar = 5
+   vec/cre tmppar(40) r  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+   vec/cre tmpste(40) r 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5 1e-5
+   vec/cre tmpmin(40) r -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3 -1e3
+   vec/cre tmpmax(40) r 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3 1e3
+   vec/cre tmperr(40) r  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0
+         
+   application hminuit exit
+     improve
+     migrad
+*     minos
+	contour 1 2
+   exit 
+   
+   hi/fit [hist]([min]:[max]) laplace [opt] [npar] tmppar tmpste tmpmin tmpmax tmperr
+   
+   hi/plo [hist]([min]:[max]) e
+    RETURN 
+
+ MACRO load
+   application comis quit      
+* --------------------------------------------------------------------
+      Real FUNCTION pulsing(x)
+      implicit none 
+        COMMON/PAWPAR/par(6)
+        Real x
+* 
+	Real meanlife
+	Real ton
+	Real ttotal
+	Real N0
+	Real N1
+	Real step
+	Real TB
+* 
+	meanlife = par(1)
+	Ton      = par(2)*par(3)
+	Ttotal   = par(3)
+	N0       = par(4)
+	N1       = par(5)
+	step     = par(6)
+* 
+	TB = (N1-N0*exp(-Ton/meanlife))/(1-exp(-Ton/meanlife))
+* 
+	If (x.lt.Ton) Then
+	  pulsing = TB-(TB-N0)*exp(-x/meanlife) + step
+	Else
+	  pulsing = N1*exp(-(x-Ton)/meanlife)
+	EndIf
+      END
+*
+      Real FUNCTION laplace(x)
+      implicit none
+        COMMON/PAWPAR/par(40)
+        Real    x
+*
+	Integer i
+	Real    dT,w
+* 
+	w = 1.0/200!ms
+*
+	laplace=0
+*
+	Do i=1,5
+	  laplace = laplace + par(i)*exp(-x*w*i)
+	EndDO
+      END
+   quit
+ RETURN
+ 

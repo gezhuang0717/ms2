@@ -1,0 +1,85 @@
+opt stat
+lgz
+zone 2 1
+ht 101 cont
+ht 102 cont
+wait
+zone 2 2
+ht 103 cont
+ht 104 cont
+ht 105 cont
+ht 106 cont
+wait
+ht 108 cont
+ht 109 cont
+ht 110 cont
+ht 111 cont
+wait
+lnz
+zone 1 5
+ht 112
+ht 113
+ht 114
+ht 115
+ht 116
+wait
+lgz
+zone
+ht 117 cont
+wait
+zone 2 2
+ht 118 cont
+ht 119 cont
+ht 120 cont
+ht 121 cont
+wait
+zone 1 3
+lnz
+lgy
+ht 122
+ht 123
+ht 124
+wait
+ht 125
+ht 126
+ht 127
+wait
+zone 1 2
+ht 128
+ht 129
+wait
+ht 130
+ht 131
+wait
+ht 132
+ht 133
+wait
+zone 2 2
+ht 134
+ht 135
+ht 136
+ht 137
+wait
+zone 1 2
+ht 138
+ht 139
+wait
+ht 140
+ht 141
+wait
+ht 142
+ht 143
+wait
+ht 144
+ht 145
+wait
+zone
+ht 146
+wait
+zone 1 2
+ht 147
+ht 148
+wait
+ht 149
+ht 150
+wait

@@ -1,0 +1,148 @@
+8
+
+dir
+269
+http://ribfdaq/svn/repos/anapaw/usersrc/branches/ribf57/prm
+http://ribfdaq/svn/repos/anapaw
+
+
+
+2010-05-22T01:02:05.794745Z
+268
+daq
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b8b8a78c-4fb9-42c1-839a-7d3e7c6a53ef
+
+image.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+f0fb756b68fd1f80640b5a2789cb8a8a
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+matrix.prm.orig
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+9bca5a540a7c6458448269ed2047db30
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+ppac.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+86f481378c2df47744281adb92dc45ff
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+matrix.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+63e0d523efd8e4da442fce50a4e0064a
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+ppac
+dir
+
+totale.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+2c5f0bd5af31bf476d545fcb989625dd
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+brho.prm
+file
+270
+
+
+
+2010-05-23T11:27:03.000000Z
+023eb45d684305b10effe9fff33121dc
+2010-05-24T02:09:21.358776Z
+270
+daq
+
+ic.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+4423a205e7adb4e4dcdff10cf3c8f403
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+pid.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+a18f7a57efded9a7f627d672dee78c47
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+pla.prm
+file
+
+
+
+
+2010-05-17T20:55:18.000000Z
+ec7a2a5c73c0196541b359933c807856
+2010-05-17T20:52:47.628426Z
+259
+daq
+
+must2
+dir
+
+pid
+dir
+
+pla
+dir
+

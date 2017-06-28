@@ -1,0 +1,4 @@
+ macro fgr [id] [xmin] [xmax]
+   
+   hi/fit [id]([xmin].:[xmax].) g
+   return

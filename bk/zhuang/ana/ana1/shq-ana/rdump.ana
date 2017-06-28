@@ -1,0 +1,38 @@
+c
+c ANAFILE : matsu.ana
+c 
+c-------  Analyzer  -------
+c  1 = encppac
+c  3 = encrf
+c 21 = encspla
+c 22 = encbldc30a for DC31
+c 23 = encbldc30a for DC32
+c 24 = enc3 for F3MWDC Tracking
+c 28 = encbldcs20a for DC71
+c 30 = encbldcs20a for DC72
+c 33 = encbldcs20a for DC91
+c 36 = encbldcs20a for DCX1
+c 38 = encbldcs20a for DCX1
+c 39 = encbldcs23a for DCS0
+c 42 = encspla_qdc for FHXPla-QDC
+c 45 = encbldcs22a for DCS2-1
+c 46 = encbldcs22a for DCS2-2
+c 48 = encs2 for S2MWDC Tracking
+c 41 = encsi 
+c 10 = encdiamond
+c 15 = enctraj
+c 18 = encoptics
+c 47 = encphys
+c--------------------------
+c 
+analys
+7 ! coin
+hst1
+0,	7,101,108,11,	8,0.5,8.5,	'Coin'
+gate
+c S2 WinDiscri. (High)
+777,	7,105,105,11,	4.5,5.5
+hst1
+777,	7,101,108,11,	8,0.5,8.5,	'Coin Selected'
+
+end

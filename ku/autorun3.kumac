@@ -1,0 +1,20 @@
+*book ana/gamma.ana
+*
+ana/loop ./rdf/0012.rdf b ; mess RUN 12 end.
+ana/loop ./rdf/0013.rdf b ; mess RUN 13 end.
+ana/loop ./rdf/0014.rdf b ; mess RUN 14 end.
+ana/loop ./rdf/0015.rdf b ; mess RUN 15 end.
+ana/loop ./rdf/0016.rdf b ; mess RUN 16 end.
+ana/loop ./rdf/0017.rdf b ; mess RUN 17 end.
+ana/loop ./rdf/0018.rdf b ; mess RUN 18 end.
+ana/loop ./rdf/0019.rdf b ; mess RUN 19 end.
+ana/loop ./rdf/0020.rdf b ; mess RUN 20 end.
+ana/loop ./rdf/0021.rdf b ; mess RUN 21 end.
+ana/loop ./rdf/0022.rdf b ; mess RUN 22 end.
+ana/loop ./rdf/0023.rdf b ; mess RUN 23 end.
+ana/loop ./rdf/0024.rdf b ; mess RUN 24 end.
+ana/loop ./rdf/0025.rdf b ; mess RUN 25 end.
+ana/loop ./rdf/0026.rdf b ; mess RUN 26 end.
+*
+*hstore gamma141219.hbk
+*exec kumac/yuji.kumac

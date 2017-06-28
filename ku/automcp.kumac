@@ -1,0 +1,11 @@
+book ana/mcpg.ana
+*
+*ana/loop ./ridf/run0240.ridf b ; mess RUN 0240 end.
+*ana/loop ./ridf/run0242.ridf b ; mess RUN 0242 end.
+*ana/loop ./ridf/run0243.ridf b ; mess RUN 0243 end.
+*ana/loop ./ridf/run0244.ridf b ; mess RUN 0244 end.
+*ana/loop ./ridf/run0246.ridf b ; mess RUN 0246 end.
+ana/loop ./ridf/run0223.ridf b ; mess RUN 0223 end.
+
+*
+hstore 223mcp.hbk
